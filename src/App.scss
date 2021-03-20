@@ -1,38 +1,615 @@
-.App {
-  text-align: center;
+// .App {
+//   text-align: center;
+// }
+
+// .App-logo {
+//   height: 40vmin;
+//   pointer-events: none;
+// }
+
+// @media (prefers-reduced-motion: no-preference) {
+//   .App-logo {
+//     animation: App-logo-spin infinite 20s linear;
+//   }
+// }
+
+// .App-header {
+//   background-color: #282c34;
+//   min-height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: calc(10px + 2vmin);
+//   color: white;
+// }
+
+// .App-link {
+//   color: #61dafb;
+// }
+
+// @keyframes App-logo-spin {
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg);
+//   }
+// }
+
+
+@charset "utf-8";
+/* Common */
+
+
+body{overflow-x: hidden;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,form,fieldset,p,pre{margin:0;padding:0;font-size: 14px;color: #333;font-family: 'Noto Sans KR';line-height: 150%;font-weight: 300;}
+td,th{padding: 0;font-family: 'Noto Sans KR', sans-serif;font-weight: 300;font-size: 14px;color: #333;}
+body{height:100%;position:relative;overflow-y: scroll;word-break:keep-all;*word-break:keep-all;-ms-word-break:keep-all}
+img,fieldset,iframe{border:0 none}
+li{list-style:none}
+input,select,button,textarea{padding: 0 10px;border: 1px solid #ddd;font-family: 'Noto Sans KR';line-height: 150%;font-size: 14px;font-weight: 300;box-sizing: border-box;outline: none;}
+textarea{padding: 10px;}
+img{max-width: 100%;max-height: 100%;vertical-align:top}
+em,address{font-style:normal}
+option{padding-right:6px}
+legend{*width:0}
+table{width: 100%;border-collapse:collapse;border-spacing:0}
+pre{white-space: pre-line;}
+span{line-height: 100%;}
+sup{font-size: 50%;}
+label,button {cursor: pointer;}
+
+/* googlemap ico*/
+.map_api img{max-width:inherit;max-height:inherit;}
+
+/* blind */
+.blind{display: inline-block !important;overflow: hidden;position: absolute;top: 0;left: 0;width: 1px !important;height: 1px !important;margin: 0 !important;font-size: 0 !important;line-height: 0 !important;}
+
+.skip_nav li a{position: absolute;left: -3000%;}
+.skip_nav li a:focus{display: block;left: 0;top: 0;z-index: 2000;width: 100%;height: 30px;line-height: 30px;background-color: #039;color: #fff;text-align: center;}
+
+
+
+
+/* popup Layer */
+.syspop{max-width:100%;position: absolute;z-index: 1200;background-color: #fff;border: 1px solid #ccc}
+.l-header{display:none;}
+.l-cont{background-color: #fff;word-break: break-all}
+.l-footer{width:100%;padding:10px;box-sizing:border-box;bottom: 0px;right: 0px;text-align: right}
+.l-footer span{cursor: pointer}
+
+@media screen and (max-width: 1000px){
+	.syspop{top:20px !important;left:0 !important;width:100% !important;height:100% !important;background-color:transparent;border:none;}
+	.syspop:after{content:"";position:fixed;display:block;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);}
+	.syspop .wrap{position:relative;z-index:100;max-width:95%;margin:0 auto;text-align:center;}
+	.syspop .l-cont{height:auto !important;}
+	.syspop .l-cont img{width:100%;}
+	.syspop .l-footer{position: relative;z-index: 10;width: 95%;margin: 0 auto;background-color:#fff;}
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+/* position */
+.por{position: relative;}
+.poa{position: absolute;}
+.pof{position: fixed;}
+
+.imgz{width: 100%;}
+
+.btn_img{cursor: pointer;border: none;}
+.bdn{border: none;}
+.cup{cursor: pointer;}
+
+.fwb{font-weight: bold;}
+.fw4{font-weight: 400;}
+.fw5{font-weight: 500;}
+.fw6{font-weight: 600;}
+
+.vam{vertical-align: middle;}
+
+/* text */
+.tov{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+.tov2{display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
+.tal{text-align: left;}
+.tac{text-align:center;}
+.tar{text-align: right;}
+
+/* padding */
+.pt0{padding-top: 0;}
+.pt5{padding-top: 5px;}
+.pt10{padding-top: 10px;}
+.pt15{padding-top: 15px;}
+.pt20{padding-top: 20px;}
+.pt30{padding-top: 30px;}
+.pt40{padding-top: 40px;}
+.pt50{padding-top: 50px;}
+.pt60{padding-top: 60px;}
+.pt70{padding-top: 70px;}
+.pt80{padding-top: 80px;}
+.pt100{padding-top: 100px;}
+
+.pb0{padding-bottom: 0;}
+.pb5{padding-bottom: 5px;}
+.pb10{padding-bottom: 10px;}
+.pb15{padding-bottom: 15px;}
+.pb20{padding-bottom: 20px;}
+.pb30{padding-bottom: 30px;}
+.pb40{padding-bottom: 40px;}
+.pb50{padding-bottom: 50px;}
+.pb60{padding-bottom: 60px;}
+.pb70{padding-bottom: 70px;}
+.pb80{padding-bottom: 80px;}
+.pb90{padding-bottom: 90px;}
+.pb100{padding-bottom: 100px;}
+.pb150{padding-bottom: 150px;}
+
+.mt50{margin-top: 50px;}
+
+.mb5{margin-bottom: 5px;}
+.mb10{margin-bottom: 10px;}
+.mb15{margin-bottom: 15px;}
+.mb20{margin-bottom: 20px;}
+.mb30{margin-bottom: 30px;}
+.mb40{margin-bottom: 40px;}
+.mb50{margin-bottom: 50px;}
+.mb60{margin-bottom: 60px;}
+.mb70{margin-bottom: 70px;}
+.mb80{margin-bottom: 80px;}
+.mb100{margin-bottom: 100px;}
+
+/* display */
+.dn{display: none;}
+.dib{display: inline-block;}
+.db{display: block;}
+.dt{display: table;width: 100%;height: 100%;}
+.dtr{display: table-row;width: 100%;}
+.dtc{display: table-cell;vertical-align: middle;}
+.ti{text-indent: -999em;}
+.check_ti{overflow: hidden;height: 0;}
+
+/* float */
+.fl{float: left;}
+.fr{float: right;}
+.flUl>li{float: left;}
+.flUl:after{content: "";display: block;clear: both;}
+.cb:after{content: "";display: block;clear: both;}
+
+/* pageNum */
+// .page_num{position: relative;margin: 50px 0;text-align: center;font-size: 0;}
+// .page_num a{display: inline-block;width: 38px;height: 38px;margin-left: -1px;border: 1px solid #ccc;text-align: center;color: #888;line-height: 36px;font-size: 14px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;vertical-align: middle;}
+// .page_num a.activ{position: relative;z-index: 1;color: #fff;background-color: #f42434;}
+// .page_num a.page{text-indent: -9999px;}
+// .page_num a.first{background: url(../img/page_first.png) 50% 50% no-repeat;}
+// .page_num a.last{background: url(../img/page_last.png) 50% 50% no-repeat;}
+// .page_num a.l{margin-right: 10px;background: url(../img/page_left.png) 50% 50% no-repeat;}
+// .page_num a.r{margin-left: 10px;background: url(../img/page_right.png) 50% 50% no-repeat;}
+
+@media screen and (max-width:767px) {
+	.page_num a.first,.page_num a.last{display: none;}
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.bd_s_box{padding: 30px 320px;text-align: center;font-size: 0;background-color: #f3f3f3;}
+.bd_s_box .bd_sel{display: block;width: 150px;height: 40px;border: 1px solid #bdbdc9;background-color: #fff;box-sizing: border-box;}
+.bd_s_box .bd_inp{display: block;width: calc(100% - 240px);height: 40px;margin: 0 5px;border: 1px solid #bdbdc9;background-color: #fff;box-sizing: border-box;}
+.bd_s_box .bd_s_inp input{display: block;width: 100%;height: 38px;border: none;}
+.bd_s_box .bd_submit{display: block;width: 80px;height: 40px;color: #fff;background-color: #f42434;font-size: 14px;}
+
+.bx-wrapper{position: relative;}
+.bx-wrapper .bx-controls{position: absolute;}
+
+/* board pass */
+.box-message{padding: 50px 0;border: 1px solid #ddd;background-color: #f7f7f7;text-align: center;}
+.box-message .default{width: 250px;height: 28px;margin-top: 15px;border: 1px solid #ccc;}
+.box-message .btn_img{margin-top: 15px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =====================================================
+// style.css
+// =====================================================
+
+
+
+header {
+    position: relative;
+    width: 1000px;
+    height: 120px;
+    margin: 0 auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+header h1 {
+    display: inline-block;
+    width: 175px;
+    text-align: center;
+    line-height: 50px;
+    background: url(http://image.kyobobook.co.kr/ink/images/gnb/logo_kyobo.png);
+
+    position: absolute;
+    left: 0;
+    top: 31px;
 }
 
-.App-link {
-  color: #61dafb;
+header .searcharea {
+    position: absolute;
+    top: 47px;
+    left: 260px;
+    width: 396px;
+    border: 1px solid #5e6b9e;
+    background: #fafafa;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+header .main_input {
+    float: left;
+    width: 345px;
+    height: 20px;
+    margin: 10px 0 0 9px;
+    padding: 3px 1px 1px 6px;
+    border: 0 solid #fff;
+    color: #555;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: bold;
+    background-color: #fafafa;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    outline-style: none;
+}
+
+header .btn_search {
+    float: left;
+    width: 42px;
+    height: 40px;
+    border: none;
+    background: #fafafa url(http://image.kyobobook.co.kr/ink/images/gnb/btn_search3.gif) no-repeat 0 0;
+    font-size: 0;
+    cursor: pointer;
+}
+nav {
+    width: 100%;
+    height: 50px;
+    background: #5e6b9e;
+}
+nav article {
+    width: 1000px;
+    margin: 0 auto;
+    height: 50px;
+    line-height: 50px;
+}
+
+nav article ul{
+    display: flex;
+}
+nav article li {
+    width: 100px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+main {
+    width: 1000px;
+    margin: 30px auto;
+}
+
+.book_list h3,
+article h3 {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.book_list ul{
+    display: flex;
+    flex-flow: wrap;
+}
+
+.book_list ul li {
+    border: 1px solid #000;
+    width: 200px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.book_list ul li .author,
+.book_list ul li strong,
+.book_list ul li .price {
+    display: block;
+    text-align: center;
+}
+
+.book_list ul li dt {
+    height: 158px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border: 1px solid;
+}
+
+
+
+
+/* 로그인 */
+.join,
+.login{
+    width: 460px;
+    padding: 20px;
+    background: #f5f6f7;
+    margin: 0 auto;
+}
+.join>p,
+.login>p {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+.input_row {
+    position: relative;
+    height: 29px;
+    margin-bottom: 8px;
+    padding: 7px 35px 10px 11px;
+    border: solid 1px #dadada;
+    background: #fff;
+}
+
+.int {
+    font-size: 14px;
+    line-height: 16px;
+    position: relative;
+    z-index: 9;
+    width: 100%;
+    height: 16px;
+    padding: 16px 0 12px;
+    color: #000;
+    border: none;
+    background: #fff;
+    -webkit-appearance: none;
+}
+
+.login{
+    padding: 20px;
+    background: #f5f6f7;
+}
+.login input {
+    cursor: pointer;
+}
+.login>ul li {
+    width: 50%;
+    text-align: center;
+    font-weight: bold;
+    padding: 20px 0 10px;
+    cursor: pointer;
+}
+.login .login_btn,
+.join .join_btn {
+    width: 460px;
+    height: 48px;
+    background: #5e6b9e;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.sns_login>p,
+.idpw_find>p {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    height: 50px;
+    line-height: 40px;
+}
+.sns_login li {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color:#fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sns_login .google_login {
+    background: #dd4e40;
+}
+
+.sns_login .naver_login {
+    background: #03c75a;
+}
+
+.sns_login .facebook_login {
+    background: #4c8bf5;
+}
+
+/* 로그인 끝 */
+
+/* id/pw 찾기 */
+.find_error,
+.id_find_end,
+.pw_find_end {
+    padding: 30px 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.find_error span,
+.id_find_end span,
+.pw_find_end span {
+    font-weight: bold;
+    color: #5e6b9e;
+}
+
+.btn_wrap {
+    padding-top: 30px;
+    text-align: center;
+}
+.btn_wrap button {
+    width: 49%;
+    height: 48px;
+    display: inline-block;
+    margin: 0 auto;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+}
+.btn_wrap button:first-child {
+    background: #5e6b9e;
+}
+.btn_wrap button:nth-child(2) {
+    background: #888;
+}
+/* id/pw 찾기 끝 */
+
+
+/* 회원가입 */
+
+.terms_bx_list {
+    margin-top: 4px;
+}
+
+.terms_bx {
+    display: block;
+    padding-top: 30px;
+}
+.terms_bx:first-child {
+    padding-top: 0;
+}
+
+.input_chk {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+
+.terms_box {
+    position: relative;
+    overflow: auto;
+    height: 88px;
+    margin-top: 8px;
+    padding: 12px;
+    border: 1px solid #dadada;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+/* 회원가입 끝 */
+
+
+/*장바구니*/
+
+    .my_cart .top_btn {
+        float: right;
+    }
+
+    table tr {
+        border-bottom:solid 1px #dadada;
+    }
+
+    table td {
+        text-align: center;
+        padding: 20px 0;
+    }
+    .my_cart_table tbody tr>td>div {
+        display: inline-block;
+        float: left;
+    }
+
+    .my_cart_table tbody div.img {
+        display: inline-block;
+        width: 48px;
+        border: 1px solid #000;
+    }
+    .my_cart_table tbody div.book_info{
+        margin-left: 15px;
+    }
+    .my_cart_table tbody div.book_info div,
+    .my_cart_table tbody div.book_info .author {
+        display: block;
+        text-align: left;
+
+    }
+    .my_cart_table tbody .num input {
+        width: 45px;
+        text-align: center;
+    }
+
+    .payment_sum {
+        margin-top: 10px;
+    }
+
+    .payment_sum>span {
+        display: inline-block;
+        width: 49%;
+        line-height: 30px;
+    }
+    .payment_sum>span b {
+        width: 50%;
+        float: right;
+    }
+    .payment_sum>span:nth-child(2) {
+        float: right;
+    }
+    .payment_sum>span button {
+        width: 100%;
+        height: 42px;
+    }
+    .payment_sum>span button:last-child {
+        margin-top: 5px;
+    }
+
+/*장바구니 끝*/
+
+
+footer {
+    background: #f5f5f5;
+}
+footer article {
+    margin: 0 auto;
+    padding: 50px 0;
+    width: 1000px;
+
 }

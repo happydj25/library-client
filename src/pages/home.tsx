@@ -1,13 +1,10 @@
-// home
+import React, { Component } from 'react';
+import List from '.././components/layout/list';
 
-import React from 'react';
-
-class Home extends React.Component {
-    render() {
-        return(
-            <div>home</div>
-        )
-    }
+const Home = () => {
+    return (
+        <List />
+    );
 }
 
 export default Home;

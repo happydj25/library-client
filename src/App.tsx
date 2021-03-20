@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import './App.scss';
 import Header from './components/layout/header';
 import Content from './components/layout/content';
+import Nav from './components/layout/nav';
 
-class App extends Component {
-    render() {
-        return (
-            <div>
+const App = () => {
+    return (
+            <div className="wrap">
                 <Header />
-                <Content />
+                <Nav />
+                <main>
+                    <Content />
+                </main>
             </div>
-        )
-    }
+    );
 }
 
 // const App = () => {
