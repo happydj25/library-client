@@ -3,9 +3,16 @@
 import React from 'react';
 import {Redirect} from 'react-router';
 import Home from './../pages/home';
+
 import Login from './../pages/login';
 import Join from './../pages/join';
+import IdpwFind from './../pages/idpwfind';
+import IdFindEnd from './../pages/idfindEnd';
+import PwFindEnd from './../pages/pwfindEnd';
+
 import Cart from './../pages/cart';
+
+
 
 const router = [
     {
@@ -24,6 +31,18 @@ const router = [
     {
         path:'/join',
         component: () => <Join />
+    },
+    {
+        path:'/idpwfind',
+        component: () => <IdpwFind />
+    },
+    {
+        path:'/idfindEnd',
+        component: () => <IdFindEnd />
+    },
+    {
+        path:'/pwfindEnd',
+        component: () => <PwFindEnd />
     },
     {
         path:'/cart',

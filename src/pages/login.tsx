@@ -14,8 +14,8 @@ const Login = () => {
                 </div>
                 <button className="login_btn" type="button">로그인</button>
                 <ul className="flUl">
-                    <li>회원가입</li>
-                    <li>ID/PW 찾기</li>
+                    <li><Link to="/join">회원가입</Link></li>
+                    <li><Link to="/idpwfind">ID/PW 찾기</Link></li>
                 </ul>
                 <hr />
                 <div className="sns_login">
