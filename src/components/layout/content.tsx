@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import router from './../../config/page-route';
-import routes from './../../config/page-route';
+import routes from '../../pages/page-route';
 
 const Content = () => {
     return (
