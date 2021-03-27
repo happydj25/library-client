@@ -15,7 +15,7 @@ import Pay from './paypage/Pay';
 import PayEnd from './paypage/Pay-End';
 
 import OrderInfo from './orderpage/Order-Info';
-import OrderList from './orderpage/Order-List';
+// import OrderList from './orderpage/Order-List';
 
 import Cancel from './cancelpage/Cancel';
 import CancelEnd from './cancelpage/Cancel-End';
@@ -93,10 +93,10 @@ const router = [
     },
 
 
-    {
-        path:'/orderlist',
-        component: () => <OrderList />
-    },
+    // {
+    //     path:'/orderlist',
+    //     component: () => <OrderList />
+    // },
     {
         path:'/orderinfo',
         component: () => <OrderInfo />

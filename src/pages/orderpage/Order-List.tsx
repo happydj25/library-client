@@ -19,7 +19,7 @@ const OrderInfo = () => {
                     </ul>
                     <div className="btn_wrap">
                         <Link to="/cancelinfo">취소정보</Link>
-                        <button>장바구니에 담기</button>
+                        <Link to="/cart">장바구니에 담기</Link>
                     </div>
                 </li>
                 <li>                        
@@ -35,7 +35,7 @@ const OrderInfo = () => {
                     </ul>
                     <div className="btn_wrap">
                         <Link to="/reviewwrit">리뷰쓰기</Link>
-                        <button>장바구니에 담기</button>
+                        <Link to="/cancel">주문취소</Link>
                     </div>
                 </li>
             </ul>

@@ -425,8 +425,7 @@ article h2 {
     font-weight: bold;
     cursor: pointer;
 }
-
-.sns_login .google_login {
+.sns_login .google_login button {
     background: #dd4e40;
 }
 
@@ -615,6 +614,7 @@ article>div,
     padding: 20px;
     background: #ebebeb;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 div>h3 {

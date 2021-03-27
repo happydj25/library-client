@@ -6,7 +6,7 @@ import OrderDeliver from '../../components/order/Order-Deliver';
 const OrderInfo = () => {
     return (
         <article className="order_info">
-            <h3>구매상세</h3>
+            <h3>구매 내역 상세</h3>
             <OrderItem />
             <OrderDeliver />
 
@@ -30,7 +30,7 @@ const OrderInfo = () => {
             </div>
 
             <div className="btn_wrap">
-                <Link to="/orderlist">구매내역 리스트</Link>
+                <Link to="/mypage">마이페이지로</Link>
             </div>
           
 

@@ -37,10 +37,14 @@ const CancelInfo = () => {
                 </div>
 
                 <div className="warning">
-                    취소 완료 후에는 취소 철회가 불가합니다. 다시구매를 원한다면, '재구매'를 클릭해주세요.
+                    취소 완료 후에는 취소 철회가 불가합니다.
+                    {/* 다시구매를 원한다면, '재구매'를 클릭해주세요. */}
                 </div>
-                <div className="btn_wrap">
+                {/* <div className="btn_wrap">
                     <Link to="/orderlist">구매목록 리스트</Link>
+                </div> */}
+                <div className="btn_wrap">
+                    <Link to="/mypage">마이페이지로</Link>
                 </div>
                 
             </article>

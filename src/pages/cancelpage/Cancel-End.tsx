@@ -31,7 +31,10 @@ const CancelEnd = () => {
                 취소 처리 현황 및 추가 취소 요청은 결제내역에서 하실 수 있습니다.<br />
                 주문번호 내 전체상품이 취소 요청되는 경우, 환불 예정금액은 취소 진행중 상품금액과 합산되어 노출될 수 있습니다.
             </div>
-            <input type="button" value="결제내역" />
+            <div className="btn_wrap">
+                <Link to="/mypage">마이페이지로</Link>
+            </div>
+            
         </article>
     );
 }

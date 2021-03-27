@@ -9,7 +9,7 @@ const ReviewEnd = () => {
             감사합니다 :)<br />
 
             <div className="btn_wrap">
-                <Link to="/orderlist">구매목록 리스트</Link>
+                <Link to="/mypage">마이페이지로</Link>
                 <Link to="/">홈으로</Link>
             </div>
         </article>
