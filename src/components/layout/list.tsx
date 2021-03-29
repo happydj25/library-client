@@ -9,12 +9,14 @@ const List = () => {
             <ul>
                 <li>
                     <dl>
-                        <dt>책이미지</dt>
-                        <dd>
-                            <strong>영원에 관한 증명</strong>
-                            <span className="author"></span>
-                            <span className="price">12,900원</span>
-                        </dd>
+                        <Link to="/bookview">
+                            <dt>책이미지</dt>
+                            <dd>
+                                <strong>영원에 관한 증명</strong>
+                                <span className="author"></span>
+                                <span className="price">12,900원</span>
+                            </dd>
+                        </Link>
                     </dl>
                 </li>
             </ul>

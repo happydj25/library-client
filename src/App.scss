@@ -1,42 +1,3 @@
-// .App {
-//   text-align: center;
-// }
-
-// .App-logo {
-//   height: 40vmin;
-//   pointer-events: none;
-// }
-
-// @media (prefers-reduced-motion: no-preference) {
-//   .App-logo {
-//     animation: App-logo-spin infinite 20s linear;
-//   }
-// }
-
-// .App-header {
-//   background-color: #282c34;
-//   min-height: 100vh;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   font-size: calc(10px + 2vmin);
-//   color: white;
-// }
-
-// .App-link {
-//   color: #61dafb;
-// }
-
-// @keyframes App-logo-spin {
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   to {
-//     transform: rotate(360deg);
-//   }
-// }
-
 
 @charset "utf-8";
 /* Common */
@@ -59,6 +20,13 @@ pre{white-space: pre-line;}
 span{line-height: 100%;}
 sup{font-size: 50%;}
 label,button {cursor: pointer;}
+a {display: block;color: inherit;text-decoration: none;}
+
+// 커스텀 class
+.hidden{
+    display: none;
+}
+
 
 /* googlemap ico*/
 .map_api img{max-width:inherit;max-height:inherit;}
@@ -332,7 +300,8 @@ main {
 }
 
 .book_list h3,
-article h3 {
+article h3,
+article h2 {
     font-size: 17px;
     font-weight: bold;
 }
@@ -347,6 +316,7 @@ article h3 {
     width: 200px;
     box-sizing: border-box;
     padding: 10px;
+    cursor: pointer;
 }
 
 .book_list ul li .author,
@@ -384,6 +354,7 @@ article h3 {
 }
 .input_row {
     position: relative;
+    width: auto;
     height: 29px;
     margin-bottom: 8px;
     padding: 7px 35px 10px 11px;
@@ -437,6 +408,11 @@ article h3 {
     height: 50px;
     line-height: 40px;
 }
+
+.sns_login {
+    width: auto;
+}
+
 .sns_login li {
     width: 100%;
     padding: 10px;
@@ -449,8 +425,7 @@ article h3 {
     font-weight: bold;
     cursor: pointer;
 }
-
-.sns_login .google_login {
+.sns_login .google_login button {
     background: #dd4e40;
 }
 
@@ -484,20 +459,29 @@ article h3 {
 .btn_wrap {
     padding-top: 30px;
     text-align: center;
+    border: 0;
+    background: transparent;
 }
-.btn_wrap button {
-    width: 49%;
+.btn_wrap button,
+.btn_wrap a,
+.btn_wrap input {
+    width: 48%;
     height: 48px;
+    line-height: 48px;
     display: inline-block;
-    margin: 0 auto;
+    margin: 0 5px;
     color: #fff;
     font-size: 15px;
     font-weight: bold;
 }
-.btn_wrap button:first-child {
+.btn_wrap button:first-child,
+.btn_wrap a:first-child,
+.btn_wrap input:first-child  {
     background: #5e6b9e;
 }
-.btn_wrap button:nth-child(2) {
+.btn_wrap button:nth-child(2),
+.btn_wrap a:nth-child(2),
+.btn_wrap input:nth-child(2) {
     background: #888;
 }
 /* id/pw 찾기 끝 */
@@ -558,6 +542,12 @@ article h3 {
         float: left;
     }
 
+    .my_cart_table thead tr {
+        height: 35px;
+        line-height: 35px;
+        border-top:solid 1px #dadada;
+    }
+
     .my_cart_table tbody div.img {
         display: inline-block;
         width: 48px;
@@ -593,11 +583,14 @@ article h3 {
     .payment_sum>span:nth-child(2) {
         float: right;
     }
-    .payment_sum>span button {
+    .payment_sum>span a {
         width: 100%;
         height: 42px;
+        background: #ddd;
+        text-align: center;
+        line-height: 42px;
     }
-    .payment_sum>span button:last-child {
+    .payment_sum>span a:last-child {
         margin-top: 5px;
     }
 
@@ -611,5 +604,94 @@ footer article {
     margin: 0 auto;
     padding: 50px 0;
     width: 1000px;
+}
 
+article>div,
+.order_list>ul>li,
+.order_item_list {
+    width: 100%;
+    margin: 10px 0;
+    padding: 20px;
+    background: #ebebeb;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+div>h3 {
+    margin-bottom: 10px;
+}
+
+div dl dt {
+    font-weight: bold;
+}
+
+
+
+
+.book_view .title .img {
+    display: inline-block;
+    float: left;
+    width: 20%;
+}
+.book_view .title .img img {
+    width: 200px;
+    height: 189px;
+    border: 1px solid #000;
+}
+
+.book_view .title .txt {
+    float: right;
+    width: 79%;
+    border: 1px solid #000;
+} 
+
+.book_view .title .txt>* {
+    display: block;
+    font-size: 17px;
+    line-height: 28px;
+}
+
+.review .type1,
+.review .type2 {
+    position: relative;
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px 0;
+}
+.review .type2 {
+    margin-left: 150px;
+}
+.review .type2 p {
+    font-weight: bold;
+}
+.review .type2 p.date {
+    color: #a2a2a2;    
+}
+
+.clearfix:after {
+    content: ' ';
+    display: block;
+    clear: both
+}
+
+.review_btn {
+    position: absolute;
+    width: 337px;
+    top: 10px;
+    right: 10px;
+}
+.review_btn li {
+    margin-left: 5px;
+}
+.review_btn a{
+    float: left;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    background: #5E5E5E;
+    color: #fff;
+    text-align: center;
+    margin-left: 3px;
 }
