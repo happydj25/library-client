@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+// import React, { useState } from 'react';
 import './App.scss';
 // import Axios from 'axios';
 import Header from './components/layout/Header';
 import Content from './components/layout/Content';
 import Nav from './components/layout/Nav';
 import Footer from './components/layout/Footer';
+
+
 
 const App = () => {
     // const input = useInput('');

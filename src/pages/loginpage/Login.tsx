@@ -1,9 +1,15 @@
-import { apiService } from 'core/service/ApiService';
-import React, { Component, useRef } from 'react';
+// import { apiService } from 'core/service/ApiService';
+// import React, { Component, useRef } from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
+// import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import FaceBookLogin from '../../components/login/FaceBookLogin';
+
 
 const Login = () => {
+
+    
     
 
     // const { onLoginGoogle } = props;
@@ -27,6 +33,8 @@ const Login = () => {
     const responseGoogle = (response:any) => {
         console.log(response);
       }
+
+
 
      return (
             <article className="login">
@@ -59,6 +67,10 @@ const Login = () => {
                                 onFailure={responseGoogle}
                                 cookiePolicy={'single_host_origin'}
                             />
+                            
+                        </li>
+                        <li>
+                            <FaceBookLogin />
                         </li>
                         {/* <li className="naver_login">네이버로그인</li>
                         <li className="facebook_login">페이스북로그인</li> */}

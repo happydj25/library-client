@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
+// import Country from './components/country';  
+import GoogleBooksSearch from "./Googlebooksearch"; 
+
 
 const List = () => {
     return (
         <article className="book_list">
             <h3 title="베스트셀러">베스트셀러</h3>
-            <ul>
+            <GoogleBooksSearch></GoogleBooksSearch>  
+            {/* <ul>
+                <li>
+                    
+                </li>
                 <li>
                     <dl>
                         <Link to="/bookview">
@@ -19,7 +26,7 @@ const List = () => {
                         </Link>
                     </dl>
                 </li>
-            </ul>
+            </ul> */}
         </article>
         
     );
