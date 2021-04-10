@@ -19,6 +19,22 @@ function GoogleBooksSearch() {
                 setResult(data.data.items);  
             })  
     }  
+
+    const renderBooks = result.map(book => {
+        return (
+            <li>
+                <dl>
+                    <dt><Card.Img variant="top" src={book.volumeInfo.imageLinks !== undefined ? book.volumeInfo.imageLinks.thumbnail : ''} alt={book.title} />  </dt>
+                    <dd>
+                        <strong>{book.volumeInfo.title}</strong>
+                        <span className="author">{book.volumeInfo.authors}</span>
+                        <span className="price">{book.saleInfo.listPrice.amount}</span>
+                    </dd>
+                </dl>
+            </li>
+        )
+    });
+
     return (  
         <form onSubmit={handleSubmit}>  
             <div className="card-header main-search">  
@@ -51,20 +67,21 @@ function GoogleBooksSearch() {
             </div>   */}
 
             <ul>
-            {result.map(book => (  
+                {renderBooks}
+            {/* {result.map(book => (  
                 <li>
                     <dl>
-                        {/* <Link to="/bookview"> */}
+                        <Link to="/bookview">
                             <dt><Card.Img variant="top" src={book.volumeInfo.imageLinks !== undefined ? book.volumeInfo.imageLinks.thumbnail : ''} alt={book.title} />  </dt>
                             <dd>
                                 <strong>{book.volumeInfo.title}</strong>
                                 <span className="author">{book.volumeInfo.authors}</span>
                                 <span className="price">{book.saleInfo.listPrice.amount}</span>
                             </dd>
-                        {/* </Link> */}
+                        </Link>
                     </dl>
                 </li>
-                ))}  
+                ))}   */}
             </ul>
 
         </form>  

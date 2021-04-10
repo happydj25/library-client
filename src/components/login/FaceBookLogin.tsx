@@ -1,35 +1,56 @@
 import React, { Component } from 'react';
-// import {Link} from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
-// import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-// import FacebookLogin from 'react-icons/lib/ti/social-facebook-circular';
-// import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 
-const FaceBookLogin = (props:any) => {
-    const { onLogin } = props;
-    return (
-        <div>
-        {/* <FacebookLogin
-          appId="2982476848741388"
-          autoLoad={false}
-          fields="name,first_name,last_name,email"
-          callback={onLogin}
-          render={(renderProps:any) => (
-            <div onClick={renderProps.onClick}>facebook login</div>
-          )}
-        /> */}
-          {/* <FacebookLogin
-            appId="2982476848741388"
-            autoLoad={true}
-            fields="name,first_name,last_name,email"
-            scope="public_profile,user_friends"
-            callback={onLogin}
-            icon="fa-facebook"
-            render={(renderProps:any) => (
-              <button onClick={renderProps.onClick}>This is my custom FB button</button>
-            )} /> */}
-      </div>
-    )
+export default class Facebook extends Component {
+  state = {
+    inLoggedIn: false,
+    userID: '',
+    name: '',
+    email: '',
+    picture: ''
   }
 
-export default FaceBookLogin;
+  responseFacebook = (response: any) => {
+    // console.log(response);
+    this.setState({
+      inLoggedIn: true,
+      userID: response.userID,
+      name: response.name,
+      email: response.email,
+      picture: response.picture
+    });
+  }
+  componentClicked = () => console.log('clicked');
+
+  render() {
+
+    let fbContent;
+
+    if(this.state.inLoggedIn) {
+      
+      // fbContent = (
+      //   // <div style={{
+      //   //   width: '400px',
+      //   //   margin: 'auto',
+      //   //   background: '#f4f4f4',
+      //   //   padding: '20px'
+      //   // }}>
+      //   //   <img src={this.state.picture} alt={this.state.name} />
+      //   //   <h2>Welcome {this.state.name}</h2>
+      //   //   Email: {this.state.email}
+      //   // </div>
+      // );
+    } else {
+      fbContent = ( 
+      <FacebookLogin
+        appId="2982476848741388"
+        autoLoad={true}
+        fields="name,email,picture"
+        onClick={this.componentClicked}
+        callback={this.responseFacebook} />
+        )
+    }
+
+    return <div>{fbContent}</div>;
+  }
+}
