@@ -1,30 +1,80 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {Link, useLocation} from 'react-router-dom';
 import ReviewList from '../../components/review/Review-List';
+import { Card } from 'react-bootstrap';  
 
-const BookView = () => {
+const BookView = (book:any) => {
+
+
+// console.log(book);
+    let location:any = useLocation();
+
+    const [carts, setCarts] = useLocalStorageState("carts", []);
+    const [cart, setCart] = useState("");
+
+    const bookID:String = location.state.book.id;
+    
+    // 책 이미지
+    const bookImageLinks:String = location.state.book.volumeInfo.imageLinks;
+    // 책이름
+    const bookTitle:String = location.state.book.volumeInfo.title;
+    // 책소개
+    const bookDescription:String = location.state.book.volumeInfo.description;
+    // 출판일
+    const bookPublishedDate:String = location.state.book.volumeInfo.publishedDate;
+    // 지은이
+    const bookAuthors:String = location.state.book.volumeInfo.authors;
+    // 출판사
+    const bookPublisher:String = location.state.book.volumeInfo.publisher;
+
+    // 할인전가격
+    const bookListPrice:Number = location.state.book.saleInfo.listPrice.amount;
+    // 할인가격
+    const bookRetailPrice:Number = location.state.book.saleInfo.retailPrice.amount;
+
+    useEffect(() => {
+         console.log(location.state.book);
+        // debugger
+
+        // const onChangebookTitle = {
+        //     setbookTitle(location.state.book.volumeInfo.title);
+        //   };
+        
+    }, [])
+
+    const onClick = () => {
+        // localStorage.setItem("key", bookID);
+
+        setCarts([...carts, cart]);
+        setCart("");    
+    }
+    useEffect(() => {
+        setCarts(["eat", "drink"]);
+      }, []);
+
     return (
         <article className="book_view">
 
             <div className="title clearfix">
                 <div className="img">
-                    <img src="" alt=""/>
+                    {/* <img src={bookImageLinks} alt=""/> */}
+                    <Card.Img variant="top" src={bookImageLinks} alt={book.title} />
                 </div>
                 <div className="txt">
-                    <strong>홍길동전</strong>
-                    <span className="author">홍길동/민영사</span>
-                    <span className="price">가격 : 12,900원</span>    
-                    <span className="date">출간일 : 20210327</span>
+                    <strong>{bookTitle} </strong>
+                    <span className="author">{bookAuthors}/{bookPublisher}</span>
+                    <span className="price">할인전 가격 : {bookListPrice}원 | 할인 가격 : {bookRetailPrice}</span>    
+                    <span className="date">출간일 : {bookPublishedDate}</span>
                     <div className="btn_wrap">
-                        <Link to="/pay">바로 구매하기</Link>
-                        <Link to="/cart">장바구니에 담기</Link>
+                        {/* <Link to={{pathname: `/pay/${book.id}`, state: {book} }>바로 구매하기</Link> */}
+                        {/* <Link to="/cart" onClick={setCart('d')}>장바구니에 담기</Link> */}
                     </div>
                 </div>
             </div>
 
             <div className="info">
                 <h3>책소개</h3>
-                듣기만 하여도 가슴이 설레는 말이다 청춘! 너의 두손을 가슴에 대고 물방아 같은 심장의 고동을 들어 보라 청춘의 피는 끓는다 끓는 피에 뛰노는 심장은 거선의 기관과 같이 힘있다 이것이다 인류의 역사를 꾸며 내려온 듣기만 하여도 가슴이 설레는 말이다 청춘! 너의 두손을 가슴에 대고 물방아 같은 심장의 고동을 들어 보라 청춘의 피는 끓는다 끓는 피에 뛰노는 심장은 거선의 기관과 같이 힘있다 이것이다 인류의 역사를 꾸며 내려온다.
+                {bookDescription}
             </div>
 
             <ReviewList />
@@ -34,3 +84,7 @@ const BookView = () => {
 }
 
 export default BookView ;
+
+function useLocalStorageState(arg0: string, arg1: never[]): [any, any] {
+    throw new Error('Function not implemented.');
+}

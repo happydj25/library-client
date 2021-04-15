@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 
-import Facebook from '../../components/login/FaceBookLogin';
-import GoogleLogin from '../../components/login/Google';
-import NaverLogin from '../../components/login/Naver';
+import Facebook from '../../components/login/FaceBookLogin2';
+import GoogleLogin from '../../components/login/GoogleLogin';
+import NaverLogin from '../../components/login/NaverLogin';
 
 const Login = () => {
 

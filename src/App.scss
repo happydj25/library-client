@@ -233,6 +233,7 @@ header h1 {
     position: absolute;
     left: 0;
     top: 31px;
+    font-size: 0;
 }
 
 header .searcharea {
@@ -312,7 +313,7 @@ article h2 {
 }
 
 .book_list ul li {
-    border: 1px solid #000;
+    // border: 1px solid #000;
     width: 200px;
     box-sizing: border-box;
     padding: 10px;
@@ -330,7 +331,8 @@ article h2 {
     height: 158px;
     margin-top: 8px;
     margin-bottom: 8px;
-    border: 1px solid;
+    // border: 1px solid;
+    text-align: center;
 }
 
 
@@ -357,7 +359,7 @@ article h2 {
     width: auto;
     height: 45px;
     margin-bottom: 8px;
-    padding: 7px 35px 10px 11px;
+    padding: 10px 35px 0px 11px;
     border: solid 1px #dadada;
     background: #fff;
 }
@@ -636,13 +638,13 @@ div dl dt {
 .book_view .title .img img {
     width: 200px;
     height: 189px;
-    border: 1px solid #000;
+    // border: 1px solid #000;
 }
 
 .book_view .title .txt {
     float: right;
     width: 79%;
-    border: 1px solid #000;
+    // border: 1px solid #000;
 } 
 
 .book_view .title .txt>* {

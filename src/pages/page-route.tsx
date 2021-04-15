@@ -28,6 +28,10 @@ import ReviewEnd from './reviewpage/Review-End';
 import MyPage from './mypage/MyPage';
 import BookView from './bookpage/Book-View';
 
+import BoardList from './boardpage/Board-List';
+import BoardWrit from './boardpage/Board-Writ';
+
+
 
 const router = [
     {
@@ -125,8 +129,17 @@ const router = [
     },
 
 
-    
+    {
+        path:'/boardlist',
+        component: () => <BoardList />
+    },
+    {
+        path:'/boardwrit',
+        component: () => <BoardWrit />
+    },
 
+    
+    
     
 ];
 

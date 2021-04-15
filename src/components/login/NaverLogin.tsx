@@ -1,84 +1,42 @@
-// import React, { Component } from 'react';
-// // import FacebookLogin from 'react-facebook-login';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export {}
+const { naver } = window;
 
-// let NaverLogin = new Naver.LoginWithNaverId(
-//   {
-//       clientId: "cONIXTmG9Ur6Vyf3N6Bp",
-//       callbackUrl: "http://localhost:3000/login?naver=true",
-//       isPopup: false, /* 팝업을 통한 연동처리 여부 */
-//       loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
-//   }
-// );
+function NaverLogin() {
+  
+  const location = useLocation();  
 
-// /* 설정정보를 초기화하고 연동을 준비 */
-// NaverLogin.init();
+  useEffect(() => {
+    initializeNaverLogin();
+    getNaverToken();
+  }, []);
+  
 
-
-// window.addEventListener('load', function () {
-//   NaverLogin.getLoginStatus(function (status: any) {
-//       if (status) {
-//   // 로그인 성공
-//       } else {
-//           console.log("callback 처리에 실패하였습니다.");
-//       }
-//   });
-// });
-
+  const initializeNaverLogin = () => {
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: 'cONIXTmG9Ur6Vyf3N6Bp',
+      callbackUrl: {'http://localhost:3000':String}, 
+      isPopup: true, // popup 형식으로 띄울것인지 설정
+      loginButton: { color: 'white', type: 1, height: '47' }, //버튼의 스타일, 타입, 크기를 지정
+    });
+    
+    naverLogin.init();
+  };
 
 
-// export default class Naver extends Component {
-//   state = {
-//     inLoggedIn: false,
-//     userID: '',
-//     name: '',
-//     email: '',
-//     picture: ''
-//   }
+  const getNaverToken = () => {
+    if (!location.hash) return;
+    const token = location.hash.split('=')[1].split('&')[0];
+    console.log(token);
+  };
+    
 
+  { /* id 꼭 입력해주어야 함 */}
+  return (
+    <div id='naverIdLogin' /> 
+  )
+}
 
-
-//   responseFacebook = (response: any) => {
-//     // console.log(response);
-//     this.setState({
-//       inLoggedIn: true,
-//       userID: response.userID,
-//       name: response.name,
-//       email: response.email,
-//       picture: response.picture
-//     });
-//   }
-//   componentClicked = () => console.log('clicked');
-
-//   render() {
-
-//     let NaverContent;
-
-//     if(this.state.inLoggedIn) {
-//       NaverContent = (
-//         <div style={{
-//           width: '400px',
-//           margin: 'auto',
-//           background: '#f4f4f4',
-//           padding: '20px'
-//         }}>
-//           <img src={this.state.picture} alt={this.state.name} />
-//           <h2>Welcome {this.state.name}</h2>
-//           Email: {this.state.email}
-//         </div>
-//       );
-//     } else {
-//       NaverContent = ( 
-//       <NaverLogin
-//         appId="2982476848741388"
-//         autoLoad={true}
-//         fields="name,email,picture"
-//         onClick={this.componentClicked}
-//         callback={this.responseFacebook} />
-//         )
-//     }
-
-//     return <div>{NaverContent}</div>;
-//   }
-// }
+export default NaverLogin;
