@@ -20,6 +20,11 @@ function OrderItem (props:any) {
     // 할인가격
     const bookRetailPrice:any = props.asd.saleInfo.retailPrice.amount;
 
+
+    function bfbn() {
+        console.log(#bookNum)
+    }
+
     return (
         <div className="order_item">
             <h3>주문상품</h3>
@@ -30,7 +35,7 @@ function OrderItem (props:any) {
                     </div>
                     <strong><Link to="/bookview">{bookTitle}</Link></strong>
                     <span className="author">{bookAuthors}/{bookPublisher}</span>
-                    <span className="num">1권</span>
+                    <span className="num"><input id="bookNum" type="text" value="1"/>권</span>
                     <span className="price">할인전 : {bookListPrice}원 /  할인후 :{bookRetailPrice}원 </span>
                 </li>
             </ul>
