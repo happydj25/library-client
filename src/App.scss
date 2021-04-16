@@ -636,8 +636,11 @@ div dl dt {
     width: 20%;
 }
 .book_view .title .img img {
-    width: 200px;
-    height: 189px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    // width: 200px;
+    // height: 189px;
     // border: 1px solid #000;
 }
 

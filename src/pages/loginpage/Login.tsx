@@ -12,19 +12,23 @@ const Login = (props: { onLogin: any; }) => {
     //     console.log(response)
     // }
 
-        const { onLogin } = props;
+    // const user:any = [
+    //     {}
+    // ]
 
-        const [userid, setUserid] = useState<string>('');
-        const [password, setPassword] = useState<string>('');
-        const onSubmit = (event: any) => {
-            event.preventDefault();
-            console.log(userid, password);
+    const { onLogin } = props;
 
-            /*
-             onSubmit 함수 안에서 userid, password를 서버로 보내고
-             DB에서 맞는지 확인하고 로그인을 할수있도록 응답을 보내준다
-             */
-        }
+    const [userid, setUserid] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const onSubmit = (event: any) => {
+        event.preventDefault();
+        console.log(userid, password);
+
+        /*
+            onSubmit 함수 안에서 userid, password를 서버로 보내고
+            DB에서 맞는지 확인하고 로그인을 할수있도록 응답을 보내준다
+            */
+    }
 
     useEffect(() => {
         facebookInit();

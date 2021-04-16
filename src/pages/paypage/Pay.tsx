@@ -1,18 +1,67 @@
 import React, { Component, useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import OrderCheck from '../../components/order/Order-Check';
 import OrderItem from '../../components/order/Order-Item';
 
 const Pay = () => {
-    const [title, setTitle] = useState('');
 
-    const selected = () => {
-        setTitle('');
-    }
+   
+    // console.log(location);
+    let payNowBookData = useLocation<any>();
+    let asd:any = payNowBookData.state;
 
-    useEffect(() => {
+    console.log('강아지');
+    console.log(asd.location.state.book);
 
-    }, [title])
+
+
+    // console.log(payNowBookData.state.book.accessInfo);
+//     let location:any = useLocation();
+//     useEffect(() => {
+//         console.log(location.state.book);
+//         console.log('sdfsdf');
+
+//        // debugger
+//    }, [])
+
+//    console.log(location.state.book);
+
+
+
+    // const [title, setTitle] = useState('');
+
+    // const selected = () => {
+    //     setTitle('');
+    // }
+
+    // useEffect(() => {
+
+    // }, [title])
+
+
+    // 로그인 안했으면 하라고 로그인페이지로 보내야함
+    // 유저정보 불러와야함
+    // 비회원 구매할거면 이름 주소 전화번호 받는거 
+
+
+    // const bookID:any = location.state.book.id;
+    // // 책 이미지
+    // const bookImageLinks:any = location.state.book.volumeInfo.imageLinks;
+    // // 책이름
+    // const bookTitle:String = location.state.book.volumeInfo.title;
+    // // 책소개
+    // const bookDescription:String = location.state.book.volumeInfo.description;
+    // // 출판일
+    // const bookPublishedDate:String = location.state.book.volumeInfo.publishedDate;
+    // // 지은이
+    // const bookAuthors:String = location.state.book.volumeInfo.authors;
+    // // 출판사
+    // const bookPublisher:String = location.state.book.volumeInfo.publisher;
+    // // 할인전가격
+    // const bookListPrice:any = location.state.book.saleInfo.listPrice.amount;
+    // // 할인가격
+    // const bookRetailPrice:any = location.state.book.saleInfo.retailPrice.amount;
+    
 
     return (
         <article className="pay">
@@ -32,7 +81,7 @@ const Pay = () => {
                             <option value="">부재시 경비실에 맡겨주세요</option>
                             <option value="">부재시 전화나 문자 남겨주세요</option>
                         </select>
-                        <textarea name="" id="" className="hidden"> 요청사항을 입력해 주세요</textarea>
+                        <textarea name="" id="" className="hidden" value="요청사항을 입력해 주세요"></textarea>
                     </dd>
                 </dl>
             </div>
@@ -44,8 +93,8 @@ const Pay = () => {
                     <dd>shemf1004@naver.com</dd>
                 </dl>
             </div>
-
-            <OrderItem />
+            {/* location={location}  */}
+            <OrderItem asd={asd.location.state.book} />
             
             <div>
                 <h3>결제수단</h3>
