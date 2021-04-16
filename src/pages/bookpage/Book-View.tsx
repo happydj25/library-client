@@ -3,19 +3,18 @@ import {Link, useLocation} from 'react-router-dom';
 import ReviewList from '../../components/review/Review-List';
 import { Card } from 'react-bootstrap';  
 
-const BookView = (book:any) => {
+const BookView = ({book}) => {
 
 
 // console.log(book);
     let location:any = useLocation();
 
-    const [carts, setCarts] = useLocalStorageState("carts", []);
-    const [cart, setCart] = useState("");
+    // const [carts, setCarts] = useLocalStorageState("carts", []);
+    // const [cart, setCart] = useState("");
 
-    const bookID:String = location.state.book.id;
-    
+    const bookID:any = location.state.book.id;
     // 책 이미지
-    const bookImageLinks:String = location.state.book.volumeInfo.imageLinks;
+    const bookImageLinks:any = location.state.book.volumeInfo.imageLinks;
     // 책이름
     const bookTitle:String = location.state.book.volumeInfo.title;
     // 책소개
@@ -26,7 +25,6 @@ const BookView = (book:any) => {
     const bookAuthors:String = location.state.book.volumeInfo.authors;
     // 출판사
     const bookPublisher:String = location.state.book.volumeInfo.publisher;
-
     // 할인전가격
     const bookListPrice:Number = location.state.book.saleInfo.listPrice.amount;
     // 할인가격
@@ -35,22 +33,9 @@ const BookView = (book:any) => {
     useEffect(() => {
          console.log(location.state.book);
         // debugger
-
-        // const onChangebookTitle = {
-        //     setbookTitle(location.state.book.volumeInfo.title);
-        //   };
-        
     }, [])
 
-    const onClick = () => {
-        // localStorage.setItem("key", bookID);
-
-        setCarts([...carts, cart]);
-        setCart("");    
-    }
-    useEffect(() => {
-        setCarts(["eat", "drink"]);
-      }, []);
+   
 
     return (
         <article className="book_view">
@@ -58,7 +43,7 @@ const BookView = (book:any) => {
             <div className="title clearfix">
                 <div className="img">
                     {/* <img src={bookImageLinks} alt=""/> */}
-                    <Card.Img variant="top" src={bookImageLinks} alt={book.title} />
+                    <Card.Img variant="top" src={bookImageLinks} alt={bookTitle} />
                 </div>
                 <div className="txt">
                     <strong>{bookTitle} </strong>
@@ -66,8 +51,8 @@ const BookView = (book:any) => {
                     <span className="price">할인전 가격 : {bookListPrice}원 | 할인 가격 : {bookRetailPrice}</span>    
                     <span className="date">출간일 : {bookPublishedDate}</span>
                     <div className="btn_wrap">
-                        {/* <Link to={{pathname: `/pay/${book.id}`, state: {book} }>바로 구매하기</Link> */}
-                        {/* <Link to="/cart" onClick={setCart('d')}>장바구니에 담기</Link> */}
+                        <Link to={{pathname: `/pay/${bookID}`, state: {book}}}>바로 구매하기</Link>
+                        <Link to={{pathname: `/cart/${bookID}`, state: {book}}}>장바구니에 담기</Link>
                     </div>
                 </div>
             </div>
