@@ -8,10 +8,11 @@ const Pay = () => {
    
     // console.log(location);
     let payNowBookData = useLocation<any>();
-    let asd:any = payNowBookData.state;
+    // let asd:any = payNowBookData.state;
+    let asd:any = payNowBookData;
 
     console.log('강아지');
-    console.log(asd.location.state.book);
+    // console.log(asd.location.state.book);
 
 
 
@@ -63,6 +64,26 @@ const Pay = () => {
     // const bookRetailPrice:any = location.state.book.saleInfo.retailPrice.amount;
     
 
+    function checkOnlyOne(value:any) {
+        var specifiedElement:any = document.getElementsByName("paytype");
+        document.addEventListener('click', function(event) {
+            var isClickInside = specifiedElement.contains(event.target);
+          
+            if (!isClickInside) {
+              //the click was outside the specifiedElement, do something
+            }
+          });
+  
+        // const checkboxes:any = document.getElementsByName("paytype");
+        // console.log(checkboxes);
+        // console.log(value);
+    //     const checkboxes = document.getElementsByName("paytype");
+    //     checkboxes.forEach((cb) => {
+    //       cb.checked = false;
+    //     })
+    //     element.checked = true;
+      }
+
     return (
         <article className="pay">
             <h2>결제하기</h2>
@@ -93,14 +114,18 @@ const Pay = () => {
                     <dd>shemf1004@naver.com</dd>
                 </dl>
             </div>
-            {/* location={location}  */}
-            <OrderItem asd={asd.location.state.book} />
+            {/* <OrderItem asd={asd.location.state.book} /> */}
+            <OrderItem asd={asd} />
             
             <div>
                 <h3>결제수단</h3>
                 <ul>
                     <li>
-                        <p>무통장 입금</p>
+                        <p>
+                            {/* <label htmlFor="cache">
+                                <input type="checkbox" name="paytype" value="무통장입금" onClick={checkOnlyOne} />무통장 입금
+                            </label>                             */}
+                        </p>
                         <div className="hidden">
                             <label htmlFor=""><input type="radio" name="" id="" />우리은행</label>
                             <label htmlFor=""><input type="radio" name="" id="" />국민은행</label>
@@ -109,7 +134,13 @@ const Pay = () => {
                         </div>
                     </li>
                     <li>
-                        <p>카드 결제</p>
+                        <p>
+                            <label htmlFor="payTypeCard">
+                                <input id="payTypeCard" type="checkbox" name="paytype" value="카드결제" onClick={(value) => checkOnlyOne} />카드 결제
+                                {/* onClick={a} */}
+                            </label>
+                            
+                        </p>
                         <div className="hidden">
                             <label htmlFor=""><input type="radio" name="" id="" />우리카드</label>
                             <label htmlFor=""><input type="radio" name="" id="" />국민카드</label>

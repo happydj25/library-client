@@ -3,6 +3,12 @@ import {Link} from 'react-router-dom';
 
 
 const Cart = () => {
+
+    // const cartlist:any = ;
+    
+    // localStorage.getItem(cartlist)
+
+
     return (
         <article className="my_cart">
                 <h3>장바구니</h3>

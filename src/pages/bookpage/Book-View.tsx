@@ -38,6 +38,15 @@ const BookView = () => {
     console.log('고양이');
     console.log(location.state.book);
 
+    let bookData:any = location.state.book;
+
+
+    function kkk() {
+        // localStorage.name='cartlist';
+        // localStorage['name']='cartlist';
+        localStorage.setItem('cartlist', JSON.stringify(location.state.book));
+
+    }
    
 
     return (
@@ -55,15 +64,13 @@ const BookView = () => {
                     <span className="date">출간일 : {bookPublishedDate}</span>
                     <div className="btn_wrap">
                         <Link 
-                        to={{pathname: `/pay/${bookID}`,
-                        state: {location}}}
+                        to={{pathname: `/pay/${bookID}`, state: {bookData}}}
                         >
                             바로 구매하기</Link>
-                        {/* <Link 
-                        to={{pathname: `/cart/${bookID}`,
-                         state: {location}}}
-                         >
-                             장바구니에 담기</Link> */}
+                       
+                             <button type="button" onClick={kkk}>장바구니에 담기</button>
+                             {/* to={{pathname: `/cart/${bookID}`,
+                         state: {location}}} */}
                     </div>
                 </div>
             </div>
