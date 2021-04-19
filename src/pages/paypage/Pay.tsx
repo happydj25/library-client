@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import OrderCheck from '../../components/order/Order-Check';
 import OrderItem from '../../components/order/Order-Item';
+import PayType from './Pay-Type';
 
 const Pay = () => {
 
@@ -63,26 +64,7 @@ const Pay = () => {
     // // 할인가격
     // const bookRetailPrice:any = location.state.book.saleInfo.retailPrice.amount;
     
-
-    function checkOnlyOne(value:any) {
-        var specifiedElement:any = document.getElementsByName("paytype");
-        document.addEventListener('click', function(event) {
-            var isClickInside = specifiedElement.contains(event.target);
-          
-            if (!isClickInside) {
-              //the click was outside the specifiedElement, do something
-            }
-          });
-  
-        // const checkboxes:any = document.getElementsByName("paytype");
-        // console.log(checkboxes);
-        // console.log(value);
-    //     const checkboxes = document.getElementsByName("paytype");
-    //     checkboxes.forEach((cb) => {
-    //       cb.checked = false;
-    //     })
-    //     element.checked = true;
-      }
+   
 
     return (
         <article className="pay">
@@ -119,59 +101,7 @@ const Pay = () => {
             
             <div>
                 <h3>결제수단</h3>
-                <ul>
-                    <li>
-                        <p>
-                            {/* <label htmlFor="cache">
-                                <input type="checkbox" name="paytype" value="무통장입금" onClick={checkOnlyOne} />무통장 입금
-                            </label>                             */}
-                        </p>
-                        <div className="hidden">
-                            <label htmlFor=""><input type="radio" name="" id="" />우리은행</label>
-                            <label htmlFor=""><input type="radio" name="" id="" />국민은행</label>
-                            <label htmlFor=""><input type="radio" name="" id="" />신한은행</label>
-                            <div>입금계좌 : 01-44335-4548663 우리은행</div>
-                        </div>
-                    </li>
-                    <li>
-                        <p>
-                            <label htmlFor="payTypeCard">
-                                <input id="payTypeCard" type="checkbox" name="paytype" value="카드결제" onClick={(value) => checkOnlyOne} />카드 결제
-                                {/* onClick={a} */}
-                            </label>
-                            
-                        </p>
-                        <div className="hidden">
-                            <label htmlFor=""><input type="radio" name="" id="" />우리카드</label>
-                            <label htmlFor=""><input type="radio" name="" id="" />국민카드</label>
-                            <label htmlFor=""><input type="radio" name="" id="" />신한카드</label>
-                            <div className="card">
-                                <p>카드 정보를 입력해 주세요</p>
-                                <div className="info">
-                                    <span>카드정보</span>
-                                    <input type="text" name="" id="" />-
-                                    <input type="text" name="" id="" />-
-                                    <input type="text" name="" id="" />-
-                                    <input type="text" name="" id="" />
-                                    <hr />
-                                    <span>유효기간 (MMYY)</span>
-                                    <input type="text" name="" id="" />
-                                    <hr />
-                                    <span>CVC (카드 뒷면 3자리 숫자)</span>
-                                    <input type="text" name="" id="" />
-                                    <hr />
-                                    <span>카드 비밀번호 (비밀번호 앞 2자리 숫자)</span>
-                                    <input type="text" name="" id="" />
-                                    <hr />
-                                    <label htmlFor=""><input type="radio" />전체 약관 동의</label>
-                                    <label htmlFor=""><input type="radio" />개인정보 수집 및 이용 동의</label>
-                                    <label htmlFor=""><input type="radio" />카드사 간 개인 정보 제공 동의</label>
-                                    <input type="button" value="완료" />
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <PayType />
             </div>
 
             <OrderCheck />
@@ -185,3 +115,4 @@ const Pay = () => {
 }
 
 export default Pay;
+

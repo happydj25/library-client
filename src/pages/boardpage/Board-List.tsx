@@ -4,22 +4,6 @@ import board from '../../json/board.json';
 
 const BoardList = () => {
 
-    // constructor() {
-    //     super() 
-    //     this.state = {
-    //      data: []
-    //      }
-    // }
-    //  componentDidMount() {
-    //     fetch("./employeeData.json")
-    //    .then(res => res.json()) 
-    //    .then(daabta => {
-    //     this.setState({data: daabta })
-    //     })
-    // }
-    useEffect(() => {
-        console.log('업뎃완료');
-    });
 
     return (
         <article className="board_list">

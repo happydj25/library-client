@@ -12,8 +12,6 @@ const OrderCheck = () => {
                 <li><span>배송비</span>+3,000</li>
                 <li><span>카드 결제</span>15,900</li>
             </ul>
-            <div><label htmlFor=""><input type="radio" />전체 동의하기</label></div>
-            <div><label htmlFor=""><input type="radio" />위 구매조건 확인 및 결제진행 동의</label></div>
         </div>        
     );
 }
