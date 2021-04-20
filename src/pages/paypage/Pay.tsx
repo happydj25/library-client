@@ -68,47 +68,50 @@ const Pay = () => {
 
     return (
         <article className="pay">
-            <h2>결제하기</h2>
-            <div>
-                <h3>배송지</h3>
-                {/* <h3 title={title}>{title}}</h3> */}
-                <dl>
-                    <dt>윤동주(자주쓰는 주소 별명1)</dt>
-                    <dd className="phone_num">010-7332-5710</dd>
-                    <dd>서울특별시 서대문구 홍은동 288-1 (12345)</dd>
-                    <dd>
-                        <select name="" id="">
-                            <option value="">배송메모를 선택해 주세요</option>
-                            <option value="">요청사항을 직접 입력합니다.</option>
-                            <option value="">배송 전에 미리 연락 바랍니다</option>
-                            <option value="">부재시 경비실에 맡겨주세요</option>
-                            <option value="">부재시 전화나 문자 남겨주세요</option>
-                        </select>
-                        <textarea name="" id="" className="hidden" value="요청사항을 입력해 주세요"></textarea>
-                    </dd>
-                </dl>
-            </div>
-            <div>
-                <h3>주문자</h3>
-                <dl>
-                    <dd>윤동주</dd>
-                    <dd>010-7332-5710</dd>
-                    <dd>shemf1004@naver.com</dd>
-                </dl>
-            </div>
-            {/* <OrderItem asd={asd.location.state.book} /> */}
-            <OrderItem asd={asd} />
-            
-            <div>
-                <h3>결제수단</h3>
-                <PayType />
-            </div>
+            <form action="">
+                <h2>결제하기</h2>
+                <div>
+                    <h3>배송지</h3>
+                    {/* <h3 title={title}>{title}}</h3> */}
+                    <dl>
+                        <dt>윤동주(자주쓰는 주소 별명1)</dt>
+                        <dd className="phone_num">010-7332-5710</dd>
+                        <dd>서울특별시 서대문구 홍은동 288-1 (12345)</dd>
+                        <dd>
+                            <select name="" id="">
+                                <option value="">배송메모를 선택해 주세요</option>
+                                <option value="">요청사항을 직접 입력합니다.</option>
+                                <option value="">배송 전에 미리 연락 바랍니다</option>
+                                <option value="">부재시 경비실에 맡겨주세요</option>
+                                <option value="">부재시 전화나 문자 남겨주세요</option>
+                            </select>
+                            <textarea name="" id="" className="hidden" value="요청사항을 입력해 주세요"></textarea>
+                        </dd>
+                    </dl>
+                </div>
+                <div>
+                    <h3>주문자</h3>
+                    <dl>
+                        <dd>윤동주</dd>
+                        <dd>010-7332-5710</dd>
+                        <dd>shemf1004@naver.com</dd>
+                    </dl>
+                </div>
+                {/* <OrderItem asd={asd.location.state.book} /> */}
+                <OrderItem asd={asd} />
+                
+                <div>
+                    <h3>결제수단</h3>
+                    <PayType />
+                </div>
 
-            <OrderCheck />
-            
-            <div className="btn_wrap">
-                <Link to="/PayEnd">결제하기</Link>
-            </div>
+                <OrderCheck />
+                
+                <div className="btn_wrap">
+                    {/* <Link to="/PayEnd">결제하기</Link> */}
+                    <button type="submit">결제하기</button>
+                </div>
+            </form>
             
         </article>
     );
