@@ -11,8 +11,25 @@ const BoardList = () => {
 // (글ID, 글 비밀번호, 글제목, 글내용, 작성시간, 조회수)
 // 3. 글 리스트는 배열의 순서대로 내용 불러온다
 
+    const [boardList, setBoardList] = useState({
+        // id: '',
+        boardpw: '',
+        title: '',
+        content: '',
+        // createdDateTime: '',
+        // view:''
+    })
+    const handleOnChange = (e) => {
+        setBoardList({
+        ...boardList, 
+        [e.target.name]: e.target.value
+        })
+    }
+
+
+
     let location2:any = useLocation();
-    console.log(location2);
+    console.log('gd',location2);
 
     // const [boardList, setBoardList] = useState({
     //     id: '',

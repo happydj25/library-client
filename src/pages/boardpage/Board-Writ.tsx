@@ -6,28 +6,9 @@ const BoardWrit = () => {
     // const [boardTitle, setBoardTitle] = useState('');
     // const [boardText, setBoardText] = useState('');
 
-    const [boardList, setBoardList] = useState({
-        // id: '',
-        boardpw: '',
-        title: '',
-        content: '',
-        // createdDateTime: '',
-        // view:''
-    })
-    const handleOnChange = (e) => {
-        setBoardList({
-          ...boardList, 
-          [e.target.name]: e.target.value
-        })
-          // 입력이 끝나고 inputs를 비워주는 역할
-        // setBoardList({
-        //     boardpw: "",
-        //     title: "",
-        //     content: ""
-        // })
-      }
+    
 
-      console.log(boardList);
+    //   console.log(boardList);
     
 
 
@@ -100,7 +81,7 @@ const BoardWrit = () => {
                                     type="text" 
                                     name='title'
                                     placeholder="글제목" 
-                                    onChange={handleOnChange}
+                                    // onChange={handleOnChange}
                                 />
                             </td>
                         </tr>
@@ -111,7 +92,7 @@ const BoardWrit = () => {
                                     type="password" 
                                     name='boardpw'
                                     placeholder="글비밀번호" 
-                                    onChange={handleOnChange}
+                                    // onChange={handleOnChange}
                                     minLength='4'
                                     maxLength='4'
                                 />
@@ -123,7 +104,7 @@ const BoardWrit = () => {
                                 <textarea 
                                     name="content" 
                                     placeholder="글내용" 
-                                    onChange={handleOnChange}
+                                    // onChange={handleOnChange}
                                 >
                                 </textarea>
                             </td>
@@ -133,8 +114,8 @@ const BoardWrit = () => {
                 </table>
                 
                 {/* <button onClick={onReset}>초기화</button> */}
-                <button onClick={handleOnChange} >등록</button>
-                <Link to={{pathname: `/boardlist/${boardList.title}`, state: {boardList} }}>assdf</Link>
+                {/* <button  >등록</button> */}
+                <Link onClick={handleOnChange} to={{pathname: `/boardlist/${boardList.title}`, state: {boardList} }}>등록</Link>
                 {/* <button type="submit">글쓰기</button> */}
             {/* </form> */}
         </article>

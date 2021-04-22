@@ -35,6 +35,10 @@ const BookView = () => {
     //     // debugger
     // }, [])
 
+    const dftBookPublisher:string = bookPublisher || '출판사';
+    const dftBookListPrice:any = bookListPrice || '0';
+    const dftBookRetailPrice:any = bookRetailPrice || '0';
+
     console.log('고양이');
     console.log(location.state.book);
 
@@ -59,8 +63,8 @@ const BookView = () => {
                 </div>
                 <div className="txt">
                     <strong>{bookTitle} </strong>
-                    <span className="author">{bookAuthors}/{bookPublisher}</span>
-                    <span className="price">할인전 가격 : {bookListPrice}원 | 할인 가격 : {bookRetailPrice}</span>    
+                    <span className="author">{bookAuthors}/{dftBookPublisher}</span>
+                    <span className="price">할인전 가격 : {dftBookListPrice}원 | 할인 가격 : {dftBookRetailPrice}</span>    
                     <span className="date">출간일 : {bookPublishedDate}</span>
                     <div className="btn_wrap">
                         <Link 
