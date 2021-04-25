@@ -1,123 +1,81 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 
-const BoardWrit = () => {
+const BoardWrit = ({ addBoard, Board }) => {
+    const [boardTitle, setBoardTitle] = useState('');
+    const [boardYear, setBoardYear] = useState('');
+    const [titleError, seTitleError] = useState('');
+    const [yearError, setYearError] = useState('');
 
-    // const [boardTitle, setBoardTitle] = useState('');
-    // const [boardText, setBoardText] = useState('');
+    const resetForm = () => {
+        setBoardTitle('');
+        setBoardYear('');
+    };
 
-    
+    const validateForm = () => {
+        resetErrors();
+        let validated = true;
+        if (!boardTitle) {
+            seTitleError('글제목을 넣어주세요');
+            validated = false;
+        }
+        if (!boardYear) {
+            setYearError('글내용을 넣어주세요');
+            validated = false;
+        }
+        
+        return validated;
+    };
 
-    //   console.log(boardList);
-    
+    const resetErrors = () => {
+        seTitleError('');
+        setYearError('');
+    };
 
-
-
-// const onChange = (e: { target: { name: any; value: any; }; }) => {
-//     //input에 name을 가진 요소의 value에 이벤트를 걸었다
-//     const {name,value} = e.target
-
-//     // 변수를 만들어 이벤트가 발생했을때의 value를 넣어줬다
-//     const nextBoardLists = {
-//         //스프레드 문법으로 기존의 객체를 복사한다.
-//         ...boardList,
-//         [name]: value,
-//     }
-//     //만든 변수를 seInput으로 변경해준다.
-//     setBoardList(nextBoardLists)
-
-// }
-// //안의 값을 초기화하는 객체를 변수에 넣었다
-// const onReset = () => {
-//     const resetBoardLists = {      
-//         title: '',
-//         boardpw: '',
-//         content: ''
-//     }
-// //초기화 객체값을 넣은 변수로 변경하도록 셋인풋 실행
-//     setBoardList(resetBoardLists)      
-// }
-
-
-// const onCreate = (e: {
-//         target: {
-//             value: React.SetStateAction<{
-//                 // id: '',
-//                 boardpw: string; title: string; content: string;
-//             }>;
-//         };
-//     }) => {
-//     setBoardList(e.target.value)
-    
-// }
-
-
-
-    // const addBoard = (event: any) => {
-    //     event.preventDefault();
-    //     console.log(boardTitle, boardText);
-
-    //     // board.push({
-    //     //     title: boardTitle,
-    //     //     text: boardText
-    //     // })
-
-    //     // 새로고침 ㄴㄴ 다른방법 찾아보기
-    //     // window.location.assign('/boardlist');
-    // }
+    const onSubmit = (event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+        if (validateForm()) {
+            addBoard({
+                id: Date.now(),
+                title: boardTitle,
+                year: boardYear,
+            });
+            resetErrors();
+            resetForm();
+        }
+    };
         
     return (
         <article className="board_list">
             <h3>게시판 글쓰기</h3>
-            {/* <form onSubmit={onChange}> */}
-                <table>
-                    <thead></thead>
-                    
-                    <tbody>
-                        <tr>
-                            <th>제목</th>
-                            <td>
-                                <input 
-                                    type="text" 
-                                    name='title'
-                                    placeholder="글제목" 
-                                    // onChange={handleOnChange}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>제목</th>
-                            <td>
-                                <input 
-                                    type="password" 
-                                    name='boardpw'
-                                    placeholder="글비밀번호" 
-                                    // onChange={handleOnChange}
-                                    minLength='4'
-                                    maxLength='4'
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>내용</th>
-                            <td>
-                                <textarea 
-                                    name="content" 
-                                    placeholder="글내용" 
-                                    // onChange={handleOnChange}
-                                >
-                                </textarea>
-                            </td>
-                        </tr>
-                    </tbody>
-                    
-                </table>
-                
-                {/* <button onClick={onReset}>초기화</button> */}
-                {/* <button  >등록</button> */}
-                <Link onClick={handleOnChange} to={{pathname: `/boardlist/${boardList.title}`, state: {boardList} }}>등록</Link>
-                {/* <button type="submit">글쓰기</button> */}
-            {/* </form> */}
+            <form onSubmit={onSubmit}>
+                <input 
+                    type="text" 
+                    value={boardTitle}
+                    placeholder="글제목"
+                    onChange={e => setBoardTitle(e.target.value)}
+                ></input>
+                <br />
+                <div style={{color: 'red'}}>{titleError}</div>
+
+                <textarea 
+                cols="30" 
+                rows="10"
+                value={boardYear}
+                placeholder="글내용"
+                onChange={e => setBoardYear(e.target.value)}
+                >
+                </textarea>
+                {/* <input 
+                    type="number" 
+                    value={boardYear}
+                    placeholder="글내용"
+                    onChange={e => setBoardYear(e.target.value)}
+                ></input> */}
+                <br />
+                <div style={{color: 'red'}}>{yearError}</div>
+                <button type="submit">글쓰기</button>
+            </form>
         </article>
     );
 }
