@@ -1,5 +1,5 @@
 import React, {constructor, useEffect, useRef, useState} from 'react';
-import {Link, useLocation} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import BoardWrit from './Board-Writ'
 import Board from './Board'
 
@@ -11,7 +11,12 @@ const BoardList = () => {
 // (글ID, 글 비밀번호, 글제목, 글내용, 작성시간, 조회수)
 // 3. 글 리스트는 배열의 순서대로 내용 불러온다
 
-    const [boards, setBoards] = useState<any>([]);
+    // const [boards, setBoards] = useState<any>([]);
+    const localBoard = JSON.parse(localStorage.getItem('board')) || {};
+    const [boards, setBoards] = useState(localBoard);
+    console.log(boards);
+
+    
 
     const removeBoard = (id:any) => {
         setBoards(boards.filter(board => {
@@ -29,34 +34,34 @@ const BoardList = () => {
         );
     }) : <td colSpan="4">등록된 게시글이 없습니다.</td>;
 
-    const addBoard = (board: any) => {
-        setBoards([
-        // 기존에 있는 데이터들을 유지하면서 값 추가 [구조분해할당]
-        ...boards,
-        board
-        ]);
-    };
+    // const addBoard = (board: any) => {
+    //     setBoards([
+    //     // 기존에 있는 데이터들을 유지하면서 값 추가 [구조분해할당]
+    //     ...boards,
+    //     board
+    //     ]);
+    // };
 
 
     return (
         <article className="board_list">
             
             <h3>게시판</h3>
-            <BoardWrit  addBoard={addBoard}/>
+            {/* <BoardWrit  addBoard={addBoard}/> */}
             <table>
                 <thead>
                     <tr>
                         <th>번호</th>
                         <th>제목</th>
-                        <th>작성자</th>
-                        {/* <th>작성일</th> */}
+                        {/* <th></th> */}
+                        <th>작성일</th>
                     </tr>
                 </thead>
                 <tbody>
                       {renderBoard}  
                 </tbody>
             </table>
-            {/* <Link to="/boardwrit">글쓰기</Link> */}
+            <Link to="/boardwrit">글쓰기</Link>
         </article>
     );
 }
@@ -66,3 +71,7 @@ export default BoardList ;
 function componentDidMount() {
     throw new Error('Function not implemented.');
 }
+function useLocalStorage(): [any, any] {
+    throw new Error('Function not implemented.');
+}
+

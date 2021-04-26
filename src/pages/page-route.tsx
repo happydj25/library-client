@@ -29,6 +29,7 @@ import MyPage from './mypage/MyPage';
 import BookView from './bookpage/Book-View';
 
 import BoardList from './boardpage/Board-List';
+import BoardView from './boardpage/Board-View';
 import BoardWrit from './boardpage/Board-Writ';
 
 
@@ -132,6 +133,10 @@ const router = [
     {
         path:'/boardlist',
         component: () => <BoardList />
+    },
+    {
+        path:'/boardview',
+        component: () => <BoardView />
     },
     {
         path:'/boardwrit',
