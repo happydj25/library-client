@@ -17,7 +17,8 @@ const BoardView = () => {
             
             <div></div>
             <div className="btn_wrap">
-                <button type="button">수정</button>
+                <Link to={{pathname: `/boardwrit/${boardData1.id}`, state: {boardData1}}}>수정</Link>
+                {/* <button type="button">수정</button> */}
                 <button type="button">삭제</button>
                 <Link to="/boardlist">목록으로</Link>
             </div>

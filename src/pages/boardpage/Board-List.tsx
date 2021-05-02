@@ -1,4 +1,4 @@
-import React, {constructor, useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import BoardWrit from './Board-Writ'
 import Board from './Board'
@@ -47,13 +47,11 @@ const BoardList = () => {
         <article className="board_list">
             
             <h3>게시판</h3>
-            {/* <BoardWrit  addBoard={addBoard}/> */}
             <table>
                 <thead>
                     <tr>
                         <th>번호</th>
                         <th>제목</th>
-                        {/* <th></th> */}
                         <th>작성일</th>
                     </tr>
                 </thead>
