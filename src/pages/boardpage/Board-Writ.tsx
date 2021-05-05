@@ -6,16 +6,8 @@ const BoardWrit = ({ history }) => {
     let boardData1 = useLocation<any>();
     const [inIndex, setInIndex] = useState<any>();
 
-    // let aTitle:any = boardData1.state.boardData1.title;
-    // let aTxtContent:any = boardData1.state.boardData1.txtContent;
-
-    // let a1:any = inIndex == true ? '' : aTitle;
-    // let a2:any = inIndex == true ? '' : aTxtContent;
-
-    // let [boardTitle, setBoardTitle] = useState<any>(a1);
-    // let [boardYear, setBoardYear] = useState<any>(a2);
-    let [boardTitle, setBoardTitle] = useState<any>('');
-    let [boardYear, setBoardYear] = useState<any>('');
+    let [boardTitle, setBoardTitle] = useState<any>(inIndex == true ? '' : boardData1.state.boardData1.title);
+    let [boardYear, setBoardYear] = useState<any>(inIndex == true ? '' : boardData1.state.boardData1.txtContent);
     let [titleError, seTitleError] = useState<any>('');
     let [yearError, setYearError] = useState<any>('');
    
@@ -90,7 +82,13 @@ const BoardWrit = ({ history }) => {
         
     return (
         <article className="board_list">
-            <h3>게시판 글쓰기</h3>
+
+                
+            <h3>
+                {inIndex 
+                ? '게시판 글쓰기'
+                : '게시글 수정하기'}
+            </h3>
             <form onSubmit={onSubmit}>
                 <input 
                     type="text" 
