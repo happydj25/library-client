@@ -45,48 +45,32 @@ const BoardWrit = ({ history }) => {
         setYearError('');
     };
 
-
-    const goList = () => {
-        history.push('/boardlist');
-    };
-
-
     const onSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
         let boardNum = JSON.parse(localStorage.getItem('board'));
-        // console.log('boardNum[boardNum.length]' + boardNum.length);
+        console.log(boardNum);
 
-        // let countaaa = boardNum[boardNum.length].id;
-        // console.log(boardNum[boardNum.length-1]);
-        // console.log('aaa :' + countaaa);
-
-        let count = 0;
-        if (boardNum != null) {
-            for(let i=1; i < boardNum.length+1; i++) {
-                count = i ;
-            }
-            // count = boardNum.length.id + 1
-            let ooo = Number( boardNum[boardNum.length-1].id );
-            console.log('boardNum[boardNum.length-1].id = ' + ooo+1 );
-        } else {
-            count = 1
-            
-        }
+        // let count = 0;
+        // if (boardNum != null) {
+        //     for(let i=1; i < boardNum.length+1; i++) {
+        //         count = i ;
+        //     }
+        // }
         
-            // const kkk:any = {
-            //     id: count,
-            //     title :document.getElementById('title').value,
-            //     txtContent :document.getElementById('txtContent').value,
-            //     writDateTime: new Date().toLocaleString() ,
-            // };
+            const kkk:any = {
+                id: count+1,
+                title :document.getElementById('title').value,
+                txtContent :document.getElementById('txtContent').value,
+                writDateTime: new Date().toLocaleString() ,
+            };
 
-            // let a = [];
-            // a = JSON.parse(localStorage.getItem('board')) || [];
-            // a.push(kkk);
+            let a = [];
+            a = JSON.parse(localStorage.getItem('board')) || [];
+            a.push(kkk);
 
-            // localStorage.setItem('board', JSON.stringify(a));
-            // history.push('/boardlist');
+            localStorage.setItem('board', JSON.stringify(a));
+            history.push('/boardlist');
         
     };
 
