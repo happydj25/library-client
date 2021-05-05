@@ -18,20 +18,21 @@ const BoardList = () => {
 
     
 
-    const removeBoard = (id:any) => {
-        setBoards(boards.filter(board => {
-        return board.id !== id;
-        }))
-    };
+    // const removeBoard = (id:any) => {
+    //     setBoards(boards.filter(board => {
+    //     return board.id !== id;
+    //     }))
+    // };
 
-    const renderBoard = boards.length ? boards.map((board: { id: React.Key | null | undefined; }) => {
+
+    const renderBoard = boards.length ? boards.map((board) => {
         return (
         <Board 
             board={board} 
             key={board.id}
-            removeBoard={removeBoard}
         />
         );
+        
     }) : <td colSpan="4">등록된 게시글이 없습니다.</td>;
 
     // const addBoard = (board: any) => {
