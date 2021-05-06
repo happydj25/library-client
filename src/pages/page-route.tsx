@@ -31,6 +31,7 @@ import BookView from './bookpage/Book-View';
 import BoardList from './boardpage/Board-List';
 import BoardView from './boardpage/Board-View';
 import BoardWrit from './boardpage/Board-Writ';
+import BoardModifiy from './boardpage/Board-Modifiy';
 
 
 
@@ -141,6 +142,10 @@ const router = [
     {
         path:'/boardwrit',
         component: () => <BoardWrit />
+    },
+    {
+        path:'/boardmodifiy',
+        component: () => <BoardModifiy />
     },
 
     

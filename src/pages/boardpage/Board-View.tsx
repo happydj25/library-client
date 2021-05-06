@@ -4,11 +4,10 @@ import {Link, useLocation, withRouter} from 'react-router-dom';
 const BoardView = ({ history }) => {
 
     let boardData = useLocation<any>();
-    let boardData1 = boardData.state.board;
+    let kokoa = boardData.state.board;
 
     // 삭제할 글의 id
-    let boardDeleteId = boardData1.id;
-
+    let boardDeleteId = kokoa.id;
 
     const boardDelete = () => {
         let boardNum = JSON.parse(localStorage.getItem('board'));
@@ -27,13 +26,13 @@ const BoardView = ({ history }) => {
 
     return (
         <div>
-            <div>제목: {boardData1.title}</div>
-            <div>작성시간: {boardData1.writDateTime}</div>
-            <div>글내용: {boardData1.txtContent}</div>
+            <div>제목: {kokoa.title}</div>
+            <div>작성시간: {kokoa.writDateTime}</div>
+            <div>글내용: {kokoa.txtContent}</div>
             
             <div></div>
             <div className="btn_wrap">
-                <Link to={{pathname: `/boardwrit/${boardData1.id}`, state: {boardData1}}}>수정</Link>
+                <Link to={{pathname: `/boardmodifiy/${kokoa.id}`, state: {kokoa}}}>수정</Link>
                 <button type="button" onClick={boardDelete}>삭제</button>
                 <Link to="/boardlist">목록으로</Link>
             </div>

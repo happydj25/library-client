@@ -3,21 +3,21 @@ import {Link, NavLink, useLocation, withRouter} from 'react-router-dom';
 
 const BoardWrit = ({ history }) => {
 
-    let boardData1:any = useLocation<any>();
-    const [inIndex, setInIndex] = useState<any>();
+    // let boardData1:any = useLocation<any>();
+    // const [inIndex, setInIndex] = useState<any>();
 
     // let [boardTitle, setBoardTitle] = useState<any>(inIndex == true ? '' : boardData1.state.boardData1.title);
     // let [boardYear, setBoardYear] = useState<any>(inIndex == true ? '' : boardData1.state.boardData1.txtContent);
-    let [boardTitle, setBoardTitle] = useState<any>(inIndex == true ? '' : '');
-    let [boardYear, setBoardYear] = useState<any>(inIndex == true ? '' :  '');
+    let [boardTitle, setBoardTitle] = useState<any>('');
+    let [boardYear, setBoardYear] = useState<any>('');
     let [titleError, seTitleError] = useState<any>('');
     let [yearError, setYearError] = useState<any>('');
    
-    useEffect(() => {
-        //주소창이 /boardwrit 와 같으면 true, /boardwrit/ID 가 붙으면 false
-        if (boardData1.pathname !== "/boardwrit") setInIndex(false);
-        else setInIndex(true);
-    }, [boardData1]); // <-- boardData1 의 변화만 감지한다
+    // useEffect(() => {
+    //     //주소창이 /boardwrit 와 같으면 true, /boardwrit/ID 가 붙으면 false
+    //     if (boardData1.pathname !== "/boardwrit") setInIndex(false);
+    //     else setInIndex(true);
+    // }, [boardData1]); // <-- boardData1 의 변화만 감지한다
 
 
     const resetForm = () => {
@@ -55,38 +55,30 @@ const BoardWrit = ({ history }) => {
         event.preventDefault();
 
         let boardNum = JSON.parse(localStorage.getItem('board'));
-        // console.log('boardNum[boardNum.length]' + boardNum.length);
-
-        // let countaaa = boardNum[boardNum.length].id;
-        // console.log(boardNum[boardNum.length-1]);
-        // console.log('aaa :' + countaaa);
 
         let count = 0;
         if (boardNum != null) {
-            for(let i=1; i < boardNum.length+1; i++) {
-                count = i ;
-            }
-            // count = boardNum.length.id + 1
-            let ooo = Number( boardNum[boardNum.length-1].id );
-            console.log('boardNum[boardNum.length-1].id = ' + ooo+1 );
+            // 첫번째 글이 아닐때
+            let lastId = Number( boardNum[boardNum.length-1].id );
+            count = lastId + 1;
         } else {
-            count = 1
-            
+            // 첫번째 글일때
+            count = 1;            
         }
         
-            // const kkk:any = {
-            //     id: count,
-            //     title :document.getElementById('title').value,
-            //     txtContent :document.getElementById('txtContent').value,
-            //     writDateTime: new Date().toLocaleString() ,
-            // };
+        const kkk:any = {
+            id: count,
+            title :document.getElementById('title').value,
+            txtContent :document.getElementById('txtContent').value,
+            writDateTime: new Date().toLocaleString() ,
+        };
 
-            // let a = [];
-            // a = JSON.parse(localStorage.getItem('board')) || [];
-            // a.push(kkk);
+        let a = [];
+        a = JSON.parse(localStorage.getItem('board')) || [];
+        a.push(kkk);
 
-            // localStorage.setItem('board', JSON.stringify(a));
-            // history.push('/boardlist');
+        localStorage.setItem('board', JSON.stringify(a));
+        history.push('/boardlist');
         
     };
 
@@ -96,11 +88,7 @@ const BoardWrit = ({ history }) => {
         <article className="board_list">
 
                 
-            <h3>
-                {inIndex 
-                ? '게시판 글쓰기'
-                : '게시글 수정하기'}
-            </h3>
+            <h3>게시판 글쓰기</h3>
             <form onSubmit={onSubmit}>
                 <input 
                     type="text" 
@@ -124,10 +112,8 @@ const BoardWrit = ({ history }) => {
                  />            
                 <br />
                 <div style={{color: 'red'}}>{yearError}</div>
-
-                {inIndex 
-                ? <button type="submit">글쓰기</button>
-                : <button type="submit">수정하기</button>}
+                
+                <button type="submit">글쓰기</button>
 
 
             </form>
