@@ -14,16 +14,6 @@ const BoardList = () => {
     // const [boards, setBoards] = useState<any>([]);
     const localBoard = JSON.parse(localStorage.getItem('board')) || {};
     const [boards, setBoards] = useState(localBoard);
-    console.log(boards);
-
-    
-
-    // const removeBoard = (id:any) => {
-    //     setBoards(boards.filter(board => {
-    //     return board.id !== id;
-    //     }))
-    // };
-
 
     const renderBoard = boards.length ? boards.map((board) => {
         return (
@@ -34,14 +24,6 @@ const BoardList = () => {
         );
         
     }) : <td colSpan="4">등록된 게시글이 없습니다.</td>;
-
-    // const addBoard = (board: any) => {
-    //     setBoards([
-    //     // 기존에 있는 데이터들을 유지하면서 값 추가 [구조분해할당]
-    //     ...boards,
-    //     board
-    //     ]);
-    // };
 
 
     return (
@@ -60,7 +42,10 @@ const BoardList = () => {
                       {renderBoard}  
                 </tbody>
             </table>
-            <Link to="/boardwrit">글쓰기</Link>
+            <div className="btn_wrap">
+                <Link to="/boardwrit">글쓰기</Link>
+            </div>
+                        
         </article>
     );
 }

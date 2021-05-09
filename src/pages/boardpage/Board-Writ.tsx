@@ -3,26 +3,14 @@ import {Link, NavLink, useLocation, withRouter} from 'react-router-dom';
 
 const BoardWrit = ({ history }) => {
 
-    // let boardData1:any = useLocation<any>();
-    // const [inIndex, setInIndex] = useState<any>();
-
-    // let [boardTitle, setBoardTitle] = useState<any>(inIndex == true ? '' : boardData1.state.boardData1.title);
-    // let [boardYear, setBoardYear] = useState<any>(inIndex == true ? '' : boardData1.state.boardData1.txtContent);
     let [boardTitle, setBoardTitle] = useState<any>('');
     let [boardYear, setBoardYear] = useState<any>('');
     let [titleError, seTitleError] = useState<any>('');
     let [yearError, setYearError] = useState<any>('');
-   
-    // useEffect(() => {
-    //     //주소창이 /boardwrit 와 같으면 true, /boardwrit/ID 가 붙으면 false
-    //     if (boardData1.pathname !== "/boardwrit") setInIndex(false);
-    //     else setInIndex(true);
-    // }, [boardData1]); // <-- boardData1 의 변화만 감지한다
 
-
-    const resetForm = () => {
-        setBoardTitle('');
-        setBoardYear('');
+    const resetErrors = () => {
+        seTitleError('');
+        setYearError('');
     };
 
     const validateForm = () => {
@@ -36,13 +24,7 @@ const BoardWrit = ({ history }) => {
             setYearError('글내용을 넣어주세요');
             validated = false;
         }
-        
         return validated;
-    };
-
-    const resetErrors = () => {
-        seTitleError('');
-        setYearError('');
     };
 
 

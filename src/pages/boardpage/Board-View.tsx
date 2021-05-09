@@ -6,6 +6,9 @@ const BoardView = ({ history }) => {
     let boardData = useLocation<any>();
     let kokoa = boardData.state.board;
 
+    console.log('boardData :'+JSON.stringify(boardData));
+    console.log(kokoa);
+
     // 삭제할 글의 id
     let boardDeleteId = kokoa.id;
 

@@ -4,112 +4,63 @@ import {Link, NavLink, useLocation, withRouter} from 'react-router-dom';
 const BoardModifiy = ({ history }) => {
 
     let boardData1:any = useLocation<any>();
-    // const [inIndex, setInIndex] = useState<any>();
 
-    // let a1 = boardData1.state.kokoa.title;
-    // let a2 = boardData1.state.kokoa.txtContent;
+    // 현재페이지 링크 찾아오기
+    let info = boardData1.pathname;
+    // 링크에서 필요없는 부분 삭제
+    let thisBoardId = info.replace('/boardmodifiy/',''); 
 
-    let a1,a2
-    document.getElementById('title').value = a1;
-    // let a2 = boardData1.state.kokoa.txtContent;
+    // localstorage에 저장되어있는 현재 글목록 데이터 가져오기
+    let boardNum = JSON.parse(localStorage.getItem('board'));
 
-    // console.log(boardData1);
+    // 현재 글 페이지 요소 찾기
+    let index = -1;
+    for ( var counter = 0; counter < boardNum.length; counter++) {
+        if ( boardNum[ counter ].id == thisBoardId ) {
+            index = counter;
+        }
+    }
+
+    let [boardTitle, setBoardTitle] = useState<any>(boardNum[index].title);
+    let [boardTxtContent, setBoardTxtContent] = useState<any>(boardNum[index].txtContent);
+    let [titleError, seTitleError] = useState<any>('');
+    let [contentError, setContentError] = useState<any>('');
+
     
 
-    // let [boardTitle, setBoardTitle] = useState<any>(a1);
-    // let [boardYear, setBoardYear] = useState<any>(a2);
-    let [boardTitle, setBoardTitle] = useState<any>('');
-    let [boardYear, setBoardYear] = useState<any>('');
-
-    // let boardTitle:any = boardData1.state.kokoa.title;
-    // let boardYear:any = boardData1.state.kokoa.txtContent;
-
-    // let [boardTitle, setBoardTitle] = useState<any>(boardData1.state.kokoa.title);
-    // let [boardYear, setBoardYear] = useState<any>(boardData1.state.kokoa.txtContent);
-    let [titleError, seTitleError] = useState<any>('');
-    let [yearError, setYearError] = useState<any>('');
-
-    // boardTitle(a1);
-    // boardTitle(a1);
-   
-    // const resetForm = () => {
-    //     setBoardTitle('');
-    //     setBoardYear('');
+    // const resetErrors = () => {
+    //     seTitleError('');
+    //     setContentError('');
     // };
-
     const validateForm = () => {
-        resetErrors();
+        seTitleError();
         let validated = true;
         if (!boardTitle) {
             seTitleError('글제목을 넣어주세요');
             validated = false;
         }
-        if (!boardYear) {
-            setYearError('글내용을 넣어주세요');
+        if (!boardTxtContent) {
+            setContentError('글내용을 넣어주세요');
             validated = false;
         }
-        
         return validated;
     };
 
-    const resetErrors = () => {
-        seTitleError('');
-        setYearError('');
-    };
+    const onModifiy = (event: { preventDefault: () => void; }) => {
 
-    // const onSubmit = (event: { preventDefault: () => void; }) => {
-    //     event.preventDefault();
-
-    //     // let boardNum = JSON.parse(localStorage.getItem('board'));
-    //     // console.log(boardNum);
-
-    //     // let count = 0;
-    //     // if (boardNum != null) {
-    //     //     for(let i=1; i < boardNum.length+1; i++) {
-    //     //         count = i ;
-    //     //     }
-    //     // }
-        
-    //         const kkk:any = {
-    //             id: count+1,
-    //             title :document.getElementById('title').value,
-    //             txtContent :document.getElementById('txtContent').value,
-    //             writDateTime: new Date().toLocaleString() ,
-    //         };
-
-    //         let a = [];
-    //         a = JSON.parse(localStorage.getItem('board')) || [];
-    //         a.push(kkk);
-
-    //         localStorage.setItem('board', JSON.stringify(a));
-    //         history.push('/boardlist');
-        
-    // };
-
-    // 수정할 글의 id
-    let boardModifiyId = boardData1.id;
-
-    const onModifiy = () => {
-        let boardData = JSON.parse(localStorage.getItem('board'));
-
+        event.preventDefault();
+        validateForm();
         const modifiyBoard:any = {
-            id: boardModifiyId,
+            id: thisBoardId,
             title :document.getElementById('title').value,
             txtContent :document.getElementById('txtContent').value,
             writDateTime: new Date().toLocaleString() ,
         };
 
-        let index = -1;
-        for ( var counter = 0; counter < boardData.length; counter++) {
-            if ( boardData[ counter ].id == boardModifiyId ) {
-                index = counter;
-                boardData.splice(index,1,modifiyBoard); 
-                console.log(boardData);
-
-                // localStorage.setItem("board", JSON.stringify(boardData));
-            }
-        }
-        // history.push('/boardlist');
+        // 수정전 데이터 삭제하고 수정한 값 넣어주기 
+        boardNum.splice(index,1,modifiyBoard);
+        localStorage.setItem("board", JSON.stringify(boardNum));
+        history.push('/boardlist');
     }
 
  
@@ -122,7 +73,7 @@ const BoardModifiy = ({ history }) => {
                     type="text" 
                     id="title"
                     name="title"
-                    value={boardData1.state.kokoa.title}
+                    value={boardTitle}
                     placeholder="글제목"
                     onChange={(e) => setBoardTitle(e.target.value)}
                 />
@@ -134,12 +85,12 @@ const BoardModifiy = ({ history }) => {
                     rows="10"
                     id="txtContent"
                     name="txtContent"
-                    value={boardYear}
+                    value={boardTxtContent}
                     placeholder="글내용"
-                    onChange={(e) => setBoardYear(e.target.value)}
+                    onChange={(e) => setBoardTxtContent(e.target.value)}
                  />            
                 <br />
-                <div style={{color: 'red'}}>{yearError}</div>
+                <div style={{color: 'red'}}>{contentError}</div>
 
                 <button type="submit">수정하기</button>
 
@@ -149,7 +100,3 @@ const BoardModifiy = ({ history }) => {
 }
 
 export default withRouter(BoardModifiy);
-
-function inputFormHandler<T>() {
-    throw new Error('Function not implemented.');
-}
