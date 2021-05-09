@@ -8,7 +8,10 @@ import NaverLogin from '../../components/login/NaverLogin';
 // import users from 'users.json';
 // import { fetchLogin } from "./service";
 
-const Login = (props: { onLogin: any; }) => {
+// const Login = (props: { onLogin: any; }) => {
+
+
+const Login = () => {
 
     // responseFacebook = (response) => {
     //     console.log(response)
@@ -61,6 +64,28 @@ const Login = (props: { onLogin: any; }) => {
         } else {
             console.log('기존 정보와 일치하지 않습니다.');
         }
+    }
+    const userData:any = [
+        {
+        "id":1,
+        "userId":'shemf1004',
+        "name":"윤동주",
+        "address":"서울특별시 홍은동 252-9",
+        'phone':'01073325710'
+        },
+    ]
+
+    useEffect(() => {
+        facebookInit();
+    }, [])
+
+    function facebookInit() {
+        FB.init({
+            appId: '2982476848741388',
+            cookie: true,
+            xfbml:true,
+            version: 'v9.0'
+        })
     }
 
     const Logout = () => {
@@ -146,4 +171,6 @@ const Login = (props: { onLogin: any; }) => {
      );
 }
 
-export default withRouter(Login);
+
+export default Login;
+// export default withRouter(Login);

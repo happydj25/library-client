@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 
 function OrderItem (props:any) {
-    console.log('야미');
     console.log(props);
 
     let bookData:any = props.asd.state.bookData;

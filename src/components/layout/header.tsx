@@ -1,21 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {Link} from 'react-router-dom';
 
-// class Header extends React.Component {
-//     render() {        
-//         return (
-//             <div>
-//                 {/* <Link to="/" ></Link> */}
-//                 <Link to="/"></Link>
-//                 <Link to="/home" >home</Link>
-//             </div>
 
-//         )
-        
-//     }
-// }
+const Header = (props: { getTextValue: (arg0: string) => void; }) => {
 
-const Header = () => {
+    // let [searchKeyWord, setSearchKeyWord] = useState<any>('');
+    // const sendTextValue = () => {
+    //     props.getTextValue('부모로 값 보내기');
+    // }
+
+    // const sendTextValue = () => {
+    //     props.getTextValue('자식에서 부모로 값 보내기!'); 
+    // }
+
     return (
         <header>
             <h1>
@@ -23,8 +20,15 @@ const Header = () => {
             </h1>
             <form>
                 <div className="searcharea">
-                    <input type="text" className="main_input" />
-                    <input type="button" className="btn_search" value="검색" />
+                    <input 
+                    type="text" 
+                    className="main_input" 
+                    placeholder="검색어를 입력해주세요"
+                    // value={props.getTextValue}
+                    // onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <input type="button"  className="btn_search" value="검색" />
+                    {/* onClick={sendTextValue} */}
                 </div>
             </form>
         </header>

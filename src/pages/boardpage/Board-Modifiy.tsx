@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import {Link, NavLink, useLocation, withRouter} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory, useLocation, withRouter } from 'react-router-dom';
 
-const BoardModifiy = ({ history }) => {
+const BoardModifiy = () => {
 
     let boardData1:any = useLocation<any>();
+
+    const history = useHistory();
 
     // 현재페이지 링크 찾아오기
     let info = boardData1.pathname;
@@ -11,29 +13,28 @@ const BoardModifiy = ({ history }) => {
     let thisBoardId = info.replace('/boardmodifiy/',''); 
 
     // localstorage에 저장되어있는 현재 글목록 데이터 가져오기
-    let boardNum = JSON.parse(localStorage.getItem('board'));
+    let boardNum = JSON.parse(localStorage.getItem('board') || '');
 
     // 현재 글 페이지 요소 찾기
     let index = -1;
-    for ( var counter = 0; counter < boardNum.length; counter++) {
+    for (let counter = 0, cnt = boardNum.length; counter < cnt; counter++) {
         if ( boardNum[ counter ].id == thisBoardId ) {
             index = counter;
         }
     }
 
-    let [boardTitle, setBoardTitle] = useState<any>(boardNum[index].title);
-    let [boardTxtContent, setBoardTxtContent] = useState<any>(boardNum[index].txtContent);
-    let [titleError, seTitleError] = useState<any>('');
-    let [contentError, setContentError] = useState<any>('');
+    const [boardTitle, setBoardTitle] = useState<any>(boardNum[index].title);
+    const [boardTxtContent, setBoardTxtContent] = useState<any>(boardNum[index].txtContent);
+    const [titleError, seTitleError] = useState<any>('');
+    const [contentError, setContentError] = useState<any>('');
 
-    
+    const resetErrors = () => {
+        seTitleError('');
+        setContentError('');
+    };
 
-    // const resetErrors = () => {
-    //     seTitleError('');
-    //     setContentError('');
-    // };
     const validateForm = () => {
-        seTitleError();
+        resetErrors();
         let validated = true;
         if (!boardTitle) {
             seTitleError('글제목을 넣어주세요');
@@ -52,8 +53,8 @@ const BoardModifiy = ({ history }) => {
         validateForm();
         const modifiyBoard:any = {
             id: thisBoardId,
-            title :document.getElementById('title').value,
-            txtContent :document.getElementById('txtContent').value,
+            title :boardTitle,
+            txtContent :boardTxtContent,
             writDateTime: new Date().toLocaleString() ,
         };
 
@@ -81,8 +82,8 @@ const BoardModifiy = ({ history }) => {
                 <div style={{color: 'red'}}>{titleError}</div>
 
                 <textarea 
-                    cols="30" 
-                    rows="10"
+                    cols={30} 
+                    rows={10}
                     id="txtContent"
                     name="txtContent"
                     value={boardTxtContent}

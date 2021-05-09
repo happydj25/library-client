@@ -4,7 +4,7 @@ import {Link, NavLink, useLocation, withRouter} from 'react-router-dom';
 const BoardWrit = ({ history }) => {
 
     let [boardTitle, setBoardTitle] = useState<any>('');
-    let [boardYear, setBoardYear] = useState<any>('');
+    let [boardTxtContent, setBoardTxtContent] = useState<any>('');
     let [titleError, seTitleError] = useState<any>('');
     let [yearError, setYearError] = useState<any>('');
 
@@ -20,25 +20,19 @@ const BoardWrit = ({ history }) => {
             seTitleError('글제목을 넣어주세요');
             validated = false;
         }
-        if (!boardYear) {
+        if (!boardTxtContent) {
             setYearError('글내용을 넣어주세요');
             validated = false;
         }
         return validated;
     };
 
-
-    const goList = () => {
-        history.push('/boardlist');
-    };
-
-
     const onSubmit = (event: { preventDefault: () => void; }) => {
+        validateForm();
         event.preventDefault();
-
         let boardNum = JSON.parse(localStorage.getItem('board'));
-
         let count = 0;
+
         if (boardNum != null) {
             // 첫번째 글이 아닐때
             let lastId = Number( boardNum[boardNum.length-1].id );
@@ -48,18 +42,16 @@ const BoardWrit = ({ history }) => {
             count = 1;            
         }
         
-        const kkk:any = {
+        const newBoard:any = {
             id: count,
             title :document.getElementById('title').value,
             txtContent :document.getElementById('txtContent').value,
-            writDateTime: new Date().toLocaleString() ,
+            writDateTime: new Date().toLocaleString()
         };
 
-        let a = [];
-        a = JSON.parse(localStorage.getItem('board')) || [];
-        a.push(kkk);
+        boardNum.push(newBoard);
 
-        localStorage.setItem('board', JSON.stringify(a));
+        localStorage.setItem('board', JSON.stringify(boardNum));
         history.push('/boardlist');
         
     };
@@ -88,9 +80,9 @@ const BoardWrit = ({ history }) => {
                     rows="10"
                     id="txtContent"
                     name="txtContent"
-                    value={boardYear}
+                    value={boardTxtContent}
                     placeholder="글내용"
-                    onChange={(e) => setBoardYear(e.target.value)}
+                    onChange={(e) => setBoardTxtContent(e.target.value)}
                  />            
                 <br />
                 <div style={{color: 'red'}}>{yearError}</div>
