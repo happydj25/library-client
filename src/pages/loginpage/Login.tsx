@@ -30,6 +30,16 @@ const Login = (props: { onLogin: any; }) => {
             */
     }
 
+    const userData:any = [
+        {
+        "id":1,
+        "userId":'shemf1004',
+        "name":"윤동주",
+        "address":"서울특별시 홍은동 252-9",
+        'phone':'01073325710'
+        },
+    ]
+
     useEffect(() => {
         facebookInit();
     }, [])

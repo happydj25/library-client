@@ -1,16 +1,49 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
+import Carttr from '../../components/layout/Carttr';
 
 
 
 const Cart = () => {
+
+    const cartList = JSON.parse(localStorage.getItem('cartlist') || "[]");
+    console.log(cartList);
+    const [cartlist2, setCartlist2] = useState(cartList);
+    const renderCart = cartlist2.length ? cartlist2.map((cart: any) => {
+        return (
+            <Carttr cart={cart}/>
+        );
+        
+    }) : <td colSpan={4}>장바구니 내역이 없습니다.</td>;
+
+    
+
+    useEffect(() => {
+        //  
+    }, []);
+
+    const allChecked = (selectAll: { checked: any; }) => {
+
+        const checkboxes  = document.getElementsByName('cartbook');
+        
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = selectAll.checked;
+        })
+
+    }
+
+    // 1. 로컬스토리에서 체크된 항목 bookId 를 가진 요소를 삭제한다
+    // 2. 렌더 카트를 다시 그린다
+    // 3.
+
+
     return (
         <div className="my_cart">
 
             <article className="my_cart">
                 <h3>장바구니</h3>
                 <div className="top_btn">
-                    <button type="button">선택상품 삭제</button>
+                    {/* <button type="button" onClick={cartDelete}>선택상품 삭제</button> */}
                     <select name="" id="">
                         <option value="">최근담은순서</option>
                         <option value="">상품명</option>
@@ -26,23 +59,30 @@ const Cart = () => {
                             <th>가격</th>
                             <th>수량</th>
                             <th>
-                            <label htmlFor="cart_all_select">전체선택<input type="checkbox" name="" id="cart_all_select" /></label>
+                                <label htmlFor="cart_all_select">전체선택
+                                    <input 
+                                    type="checkbox"
+                                    name="cartbook" 
+                                    value='selectall'
+                                    onClick={allChecked(this)}
+                                    id="cart_all_select" />
+                                </label>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {renderCart}
+                        {/* <tr>
                             <td>
                                 <div className="img">책이미지</div>
                                 <div className="book_info">
-                                    {/* <div><Link to="/bookview">책제목</Link></div> */}
                                     <span className="author">지은이/출판사</span>
                                 </div>
                             </td>
                             <td>12,900원</td>
                             <td className="num"><input type="text" value="1" /></td>
                             <td><input type="checkbox" name="" id="" /></td>
-                        </tr>
+                        </tr> */}
                     </tbody>
                 </table>
 

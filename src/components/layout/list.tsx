@@ -15,7 +15,7 @@ const List = () => {
 
     
     useEffect(() => {
-        axios.get("https://www.googleapis.com/books/v1/volumes?q=행복")  
+        axios.get("https://www.googleapis.com/books/v1/volumes?q=행복}")  
         .then(data => {  
             console.log(data.data.items);  
             setResult(data.data.items);  

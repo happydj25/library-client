@@ -552,8 +552,7 @@ article h2 {
 
     .my_cart_table tbody div.img {
         display: inline-block;
-        width: 48px;
-        border: 1px solid #000;
+        width: 60px;
     }
     .my_cart_table tbody div.book_info{
         margin-left: 15px;
@@ -565,8 +564,9 @@ article h2 {
 
     }
     .my_cart_table tbody .num input {
-        width: 45px;
+        width: 50px;
         text-align: center;
+        padding: 0 0 0 5px;
     }
 
     .payment_sum {

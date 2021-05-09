@@ -10,12 +10,23 @@ import Footer from './components/layout/Footer';
 
 
 const App = () => {
-    // const input = useInput('');
-    // console.log(name);
+
+    // let [textValue, setTextValue] = useState<any>('ADF');
+    // const getTextValue = (text) => {
+    //     setTextValue(text);
+    // }3
+
+    // const [textValue , setTextValue] = useState("클릭하세요");
+    //    const getTextValue = (text) => {
+    //    setTextValue(text); 
+    // } 
 
     return (
             <div className="wrap">
-                <Header />
+                <Header 
+                // value={text}
+                // getTextValue={getTextValue} 
+                />
                 <Nav />
                 <main>
                     {/* <input {...name} placeholder = 'Whats your name?'/> */}
