@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 
 function OrderItem (props:any) {
-    console.log('야미');
     console.log(props);
 
     let bookData:any = props.asd.state.bookData;
@@ -20,11 +19,6 @@ function OrderItem (props:any) {
     const bookListPrice:any = bookData.saleInfo.listPrice.amount;
     // 할인가격
     const bookRetailPrice:any = bookData.saleInfo.retailPrice.amount;
-
-
-    // function bfbn() {
-    //     console.log(#bookNum)
-    // }
 
     return (
         <div className="order_item">
