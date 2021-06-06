@@ -1,28 +1,29 @@
-// import React, { useState, useEffect } from 'react';
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 
 import GoogleLogin from '../../components/login/GoogleLogin';
 import NaverLogin from '../../components/login/NaverLogin';
 
+const Login = () => {
+    // const Login = (props: { onLogin: any; }) => {
 
-const Login = (props: { onLogin: any; }) => {
-
-    // responseFacebook = (response) => {
-    //     console.log(response)
-    // }
-
-    // const user:any = [
-    //     {}
-    // ]
-
-    const { onLogin } = props;
+    // const { onLogin } = props;
 
     const [userid, setUserid] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+
     const onSubmit = (event: any) => {
         event.preventDefault();
         console.log(userid, password);
+
+        // const loginid:string = ;
+        // const loginpw:string = ;
+
+
+        // const userListcopy:any = userList;
+
+        
+
 
         /*
             onSubmit 함수 안에서 userid, password를 서버로 보내고
@@ -52,11 +53,12 @@ const Login = (props: { onLogin: any; }) => {
      return (
             <article className="login">
                 <p>LOGIN</p>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} action="/login" method="POST">
                     <div className="input_row">
                         <input 
                             className="int" 
                             type="text" 
+                            name="id"
                             placeholder="아이디" 
                             value={userid}
                             onChange={(e) => setUserid(e.target.value)}
@@ -66,6 +68,7 @@ const Login = (props: { onLogin: any; }) => {
                         <input 
                             className="int" 
                             type="password" 
+                            name="password"
                             placeholder="비밀번호"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}

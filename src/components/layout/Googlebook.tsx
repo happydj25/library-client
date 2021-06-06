@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";  
-import axios from 'axios';  
 import { Card } from 'react-bootstrap';  
 import { Link } from "react-router-dom";
 
-function GoogleBooks({book}) {  
+function GoogleBooks({book} : {book: any}) {  
 
     return (  
         <li key={book.id}>

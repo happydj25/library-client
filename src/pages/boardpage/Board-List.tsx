@@ -2,28 +2,58 @@ import React, { useEffect, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import BoardWrit from './Board-Writ'
 import Board from './Board'
+import axios from 'axios';
 
 const BoardList = () => {
 
-// 게시글 만들기
-// 1. 게시글쓰기input에 내용 입력
-// 2. 작성완료 누르면 게시글 내용을 배열에 저장
-// (글ID, 글 비밀번호, 글제목, 글내용, 작성시간, 조회수)
-// 3. 글 리스트는 배열의 순서대로 내용 불러온다
+    // const localBoard = JSON.parse(localStorage.getItem('board') || '{}');
+    // const [boards, setBoards] = useState(localBoard);
 
-    // const [boards, setBoards] = useState<any>([]);
-    const localBoard = JSON.parse(localStorage.getItem('board')) || {};
-    const [boards, setBoards] = useState(localBoard);
-
-    const renderBoard = boards.length ? boards.map((board) => {
-        return (
-        <Board 
-            board={board} 
-            key={board.id}
-        />
-        );
+    // const renderBoard = boards.length ? boards.map((board: { id: string | number | null | undefined; }) => {
+    //     return (
+    //     <Board 
+    //         board={board} 
+    //         key={board.id}
+    //     />
+    //     );
         
-    }) : <td colSpan="4">등록된 게시글이 없습니다.</td>;
+    // }) : <td colSpan={4}>등록된 게시글이 없습니다.</td>;
+
+
+
+    // await 를 사용하기 위해 async선언
+    // useEffect(async() => {
+    //     try{
+    //     // 데이터를 받아오는 동안 시간이 소요됨으로 await 로 대기
+    //     const res = await axios.get('/')
+    //     // 받아온 데이터로 다음 작업을 진행하기 위해 await 로 대기
+    //     // 받아온 데이터를 map 해주어 rowData 별로 _inputData 선언
+    //     const _inputData = await res.data.map((rowData) => ({
+    //         board_no: rowData.board_no,
+    //         user_id: rowData.user_id,
+    //         user_name: rowData.user_name,
+    //         board_title: rowData.board_title,
+    //         board_text: rowData.board_text,
+    //         reg_dt: rowData.reg_dt
+    //         })
+    //     )
+    //     // 선언된 _inputData 를 최초 선언한 inputData 에 concat 으로 추가
+    //     setInputData(inputData.concat(_inputData))
+    //     } catch(e){
+    //     console.error(e.message)
+    //     }
+    // },[])
+
+    const [inputData, setInputData] = useState([{
+        board_no: '',
+        user_id: '',
+        user_name: '',
+        board_title: '',
+        board_text: '',
+        reg_dt: ''
+    }])
+
+    console.log('App :: inputData :: ', inputData)
 
 
     return (
@@ -39,7 +69,7 @@ const BoardList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                      {renderBoard}  
+                      {/* {renderBoard}   */}
                 </tbody>
             </table>
             <div className="btn_wrap">

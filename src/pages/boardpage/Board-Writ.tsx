@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import {Link, NavLink, useLocation, withRouter} from 'react-router-dom';
+import React, { useState } from 'react';
+import { withRouter} from 'react-router-dom';
 
-const BoardWrit = ({ history }) => {
+const BoardWrit = ({history} : {history:any}) => {
 
     let [boardTitle, setBoardTitle] = useState<any>('');
     let [boardYear, setBoardYear] = useState<any>('');
@@ -36,7 +36,7 @@ const BoardWrit = ({ history }) => {
     const onSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
-        let boardNum = JSON.parse(localStorage.getItem('board'));
+        let boardNum = JSON.parse(localStorage.getItem('board') || '{}');
 
         let count = 0;
         if (boardNum != null) {
@@ -50,13 +50,13 @@ const BoardWrit = ({ history }) => {
         
         const kkk:any = {
             id: count,
-            title :document.getElementById('title').value,
-            txtContent :document.getElementById('txtContent').value,
+            title :boardTitle,
+            txtContent :boardYear,
             writDateTime: new Date().toLocaleString() ,
         };
 
         let a = [];
-        a = JSON.parse(localStorage.getItem('board')) || [];
+        a = JSON.parse(localStorage.getItem('board') || '{}');
         a.push(kkk);
 
         localStorage.setItem('board', JSON.stringify(a));
@@ -84,8 +84,6 @@ const BoardWrit = ({ history }) => {
                 <div style={{color: 'red'}}>{titleError}</div>
 
                 <textarea 
-                    cols="30" 
-                    rows="10"
                     id="txtContent"
                     name="txtContent"
                     value={boardYear}

@@ -59,10 +59,10 @@ export default function VerticalTabs() {
   };
 
   // 랜덤 계좌번호 생성
-  const [bankAccountNum, setBankAccountNum] = useState<any>(0);
-  function chageLangSelect() {
-    setBankAccountNum (bankAccountNum => Math.floor(Math.random() * 10000000000000)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
+  // const [bankAccountNum, setBankAccountNum] = useState<any>(0);
+  // function chageLangSelect() {
+  //   setBankAccountNum (bankAccountNum => Math.floor(Math.random() * 10000000000000)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  // }
 
   return (
     <div className={classes.root}>
@@ -78,12 +78,13 @@ export default function VerticalTabs() {
         <Tab label="카드결제" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <select name="" id="" onChange={chageLangSelect}>
+        <select name="" id="" >
+        {/* onChange={chageLangSelect} */}
           <option value="" selected>은행선택</option>
           <option value="">국민은행</option>
           <option value="">우리은행</option>
         </select>
-        입금계좌 :{bankAccountNum} 우리은행
+        입금계좌 :우리은행
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className="card">
@@ -93,7 +94,7 @@ export default function VerticalTabs() {
               <option value="우리">우리</option>
               <option value="국민">국민</option>
             </select>
-            <input type="text" name="" id="" maxLength="4" />-
+            {/* <input type="text" name="" id="" maxLength="4" />-
             <input type="text" name="" id="" maxLength="4" />-
             <input type="password" name="" id="" maxLength="4" />-
             <input type="text" name="" id="" maxLength="4" />
@@ -105,7 +106,7 @@ export default function VerticalTabs() {
             <input type="text" name="" id="" maxLength="3" />
             <hr />
             <span>카드 비밀번호 (비밀번호 앞 2자리 숫자)</span>
-            <input type="password" name="" id="" maxLength="2" />
+            <input type="password" name="" id="" maxLength="2" /> */}
           </div>
         </div>
       </TabPanel>

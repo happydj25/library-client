@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Link, useLocation, withRouter} from 'react-router-dom';
 
-const BoardView = ({ history }) => {
+const BoardView = ({history} : {history:any}) => {
 
     let boardData = useLocation<any>();
     let kokoa = boardData.state.board;
@@ -12,7 +12,7 @@ const BoardView = ({ history }) => {
     // 삭제할 글의 id
     let boardDeleteId = kokoa.id;
 
-    const boardDelete = () => {
+/*     const boardDelete = () => {
         let boardNum = JSON.parse(localStorage.getItem('board'));
         let index = -1;
         for ( var counter = 0; counter < boardNum.length; counter++) {
@@ -24,7 +24,7 @@ const BoardView = ({ history }) => {
             }
         }
         history.push('/boardlist');
-    }
+    } */
 
 
     return (
@@ -36,7 +36,8 @@ const BoardView = ({ history }) => {
             <div></div>
             <div className="btn_wrap">
                 <Link to={{pathname: `/boardmodifiy/${kokoa.id}`, state: {kokoa}}}>수정</Link>
-                <button type="button" onClick={boardDelete}>삭제</button>
+                {/* <button type="button" onClick={boardDelete}>삭제</button> */}
+                <button type="button" >삭제</button>
                 <Link to="/boardlist">목록으로</Link>
             </div>
         </div>

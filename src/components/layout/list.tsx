@@ -1,23 +1,18 @@
 import axios from 'axios';
-import React, { Component, useState, useEffect } from 'react';
-import {Link, useLocation} from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
 import GoogleBooks from "./Googlebook"; 
-
-// import useAxios from "../../hooks/useAxios"; 
 
 
 const List = () => {
    
-    const [book, setBook] = useState<any>("");  
+    // const [book, setBook] = useState<any>("");  
     const [result, setResult] = useState<any>([]);  
 
 
-    
     useEffect(() => {
         axios.get("https://www.googleapis.com/books/v1/volumes?q=행복")  
         .then(data => {  
-            console.log(data.data.items);  
+            // console.log(data.data.items);  
             setResult(data.data.items);  
         })  
     }, []);

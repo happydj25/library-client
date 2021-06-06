@@ -1,5 +1,3 @@
-import React from 'react';
-// import React, { useState } from 'react';
 import './App.scss';
 // import Axios from 'axios';
 import Header from './components/layout/Header';
@@ -8,10 +6,11 @@ import Nav from './components/layout/Nav';
 import Footer from './components/layout/Footer';
 
 
-
 const App = () => {
     // const input = useInput('');
     // console.log(name);
+
+    	
 
     return (
             <div className="wrap">

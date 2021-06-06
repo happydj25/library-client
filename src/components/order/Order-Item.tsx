@@ -22,15 +22,11 @@ function OrderItem (props:any) {
     const bookRetailPrice:any = bookData.saleInfo.retailPrice.amount;
 
 
-    // function bfbn() {
-    //     console.log(#bookNum)
-    // }
-
     return (
         <div className="order_item">
             <h3>주문상품</h3>
                 <ul>
-                    <li bookID={bookID}>
+                    <li>
                         <div className="img">
                             <img src={bookImageLinks} alt={bookTitle}/>
                         </div>
