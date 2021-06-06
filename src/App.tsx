@@ -5,13 +5,18 @@ import Content from './components/layout/Content';
 import Nav from './components/layout/Nav';
 import Footer from './components/layout/Footer';
 
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const App = () => {
-    // const input = useInput('');
-    // console.log(name);
 
-    	
+    // useEffect(() => {
+    //     axios.get('/api/test')
+    //       .then(res => console.log(res))
+    //   })
 
+    
+  	
     return (
             <div className="wrap">
                 <Header />

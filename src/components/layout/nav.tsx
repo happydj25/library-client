@@ -11,7 +11,7 @@ class Nav extends Component {
                         <li><Link to="/join">회원가입</Link></li>
                         <li><Link to="/cart">장바구니</Link></li>
                         <li><Link to="/mypage">마이페이지</Link></li>
-                        <li><Link to="/boardlist">게시판</Link></li>
+                        <li><Link to="/boardlist">문의 게시판</Link></li>
                         <li></li>
                     </ul>
                 </article>

@@ -363,6 +363,25 @@ article h2 {
     border: solid 1px #dadada;
     background: #fff;
 }
+.input_row.email * {
+    width: 50%;
+}
+.input_row.phone {
+    display: flex;
+    padding: 10px 10px 0px 10px;
+}
+
+.input_row.phone input {
+    display: inline-block;
+    text-align: center;
+}
+.input_row.phone input::placeholder{
+    text-align: left;
+}
+
+.email_domain {
+    border: 0;
+}
 
 .int {
     font-size: 14px;
@@ -371,11 +390,16 @@ article h2 {
     z-index: 9;
     width: 100%;
     height: 16px;
-    padding: 16px 0 12px;
+    padding: 12px 0 12px;
     color: #000;
     border: none;
     background: #fff;
     -webkit-appearance: none;
+}
+
+.login .input_row input {
+    height: 35px;
+    line-height: 35px;
 }
 
 .login{
@@ -613,8 +637,8 @@ article>div,
 .order_item_list {
     width: 100%;
     margin: 10px 0;
-    padding: 20px;
-    background: #ebebeb;
+    // padding: 20px;
+    // background: #ebebeb;
     border-radius: 5px;
     box-sizing: border-box;
 }
@@ -699,4 +723,23 @@ div dl dt {
     color: #fff;
     text-align: center;
     margin-left: 3px;
+}
+
+.daum-postcode {
+    width: 600px;
+    height: 390px;
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 20px 0;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+.hidden {
+    display: none;
 }

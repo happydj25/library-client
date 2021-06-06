@@ -1,7 +1,81 @@
-import React, { Component } from 'react';
+import axios from 'axios';
+import React, { Component, useState } from 'react';
 import {Link} from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
+import PopupPostCode from './PopupPostCode';
 
-const Join = () => {
+const Join = ({history} : {history:any}) => {
+
+    // let userId = "anonymous";
+    // let userName = "anonymous";
+
+    const [userId, setUserId] = useState<any>('');
+    const [userPw, setUserPw] = useState<any>('');
+    const [userPw2, setUserPw2] = useState<any>('');
+    const [userName, setUserName] = useState<any>('');
+    const [userEmail, setUserEmail] = useState<any>('');
+    const [userPhone1, setUserPhone1] = useState<any>('');
+    const [userPhone2, setUserPhone2] = useState<any>('');
+    const [userPhone3, setUserPhone3] = useState<any>('');
+    const [userAdress, setUserAdress] = useState<any>('');
+
+
+    const submitJoin = () => {
+        axios.post('http://localhost:4000/register', {
+
+            user_id: userId,
+            user_pw: userPw,
+            user_name: userName,            
+            user_email: userEmail,
+            user_phone: userPhone1 +'-'+ userPhone2 +'-'+ userPhone3,
+            user_address: userAdress,
+
+        }).then(response => {
+            alert(response.data);
+            history.push('/login');
+          })
+          .catch(error => {
+            console.log(error);
+          });        
+    }
+
+    // 비밀번호 일치 확인
+    const matchPassword = () => {
+        if( userPw != userPw2 ) {
+            alert("비밀번호가 일치 하지 않습니다");
+            setUserPw("");
+            setUserPw2("");
+            return false;
+          } else{
+            alert("비밀번호가 일치합니다");
+            return true;
+          }    
+    }
+    
+    // 이메일 검증
+    const checkEmail = () => {
+        const regExp:any = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        if (userEmail.match(regExp) != null) {
+            alert('Good!');
+         } else { 
+             alert('Error');
+         }
+    }
+
+    // 전화번호 입력 시 포커스 이동
+    // const nextPhoneNum = () => {
+    //     if(userPhone1.length == 3) {
+    //         userPhone2.current.focus();
+    //         // document.getElementById('userPhone2').focus();
+    //     }
+    // }
+    
+
+
+    
+    	
+    
+    
     return (
         <article className="join">
             <p>회원가입</p>
@@ -107,36 +181,114 @@ const Join = () => {
 
             <hr />
             <div className="input_row">
-                <input className="int" type="text" placeholder="이름" />
+                <input 
+                id="userName"
+                name="userName"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                className="int" 
+                type="text" 
+                placeholder="이름" />
             </div>
             <div className="input_row">
-                <input className="int" type="text" placeholder="닉네임" />
+                <input 
+                id="userId"
+                name="userId"
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+                className="int" 
+                type="text" 
+                placeholder="아이디" />
             </div>
             <div className="input_row">
-                <input className="int" type="text" placeholder="아이디" />
+                <input 
+                // id="userPw"
+                name="userPw"
+                value={userPw}
+                onChange={(e) => setUserPw(e.target.value)}
+                className="int" 
+                type="password" 
+                placeholder="비밀번호" />
             </div>
             <div className="input_row">
-                <input className="int" type="password" placeholder="비밀번호" />
+                <input 
+                ref="userPw2"
+                name="userPw2"
+                value={userPw2}
+                onChange={(e) => setUserPw2(e.target.value)}
+                className="int" 
+                type="password" 
+                placeholder="비밀번호 확인"
+                onBlur={matchPassword}
+                />
             </div>
-            <div className="input_row">
-                <input className="int" type="password" placeholder="비밀번호 확인" />
+            <div className="input_row phone">
+                <input 
+                ref="userPhone1"
+                name="userPhone1"
+                value={userPhone1}
+                onChange={(e) => setUserPhone1(e.target.value)}
+                onKeyUp={nextPhoneNum}
+                className="int" 
+                type="text" 
+                maxLength={3}
+                placeholder="휴대폰번호 입력"/>-
+                <input 
+                ref="userPhone2"
+                name="userPhone2"
+                value={userPhone2}
+                onChange={(e) => setUserPhone2(e.target.value)}
+                className="int" 
+                maxLength={4}
+                type="text" />-
+                <input 
+                ref="userPhone3"
+                name="userPhone3"
+                value={userPhone3}
+                onChange={(e) => setUserPhone3(e.target.value)}
+                className="int" 
+                maxLength={4}
+                type="text" />
             </div>
-            <div className="input_row">
-                <input className="int" type="text" placeholder="전화번호" />
-            </div>
-            <div className="input_row">
-                <input className="int" type="text" placeholder="이메일" />
+            <div className="input_row email">
+                <input 
+                id="userEmail"
+                name="userEmail"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                className="int" 
+                type="text" 
+                placeholder="이메일 예) example@naver.com" 
+                onBlur={checkEmail}/>
             </div>
             <hr />
-            <div className="input_row">
-                <input className="int" type="text" placeholder="주소" />
-            </div>
-            <div className="input_row">
-                <input className="int" type="text" placeholder="상세주소" />
-            </div>
-            <button className="join_btn" type="button">회원가입</button>
+            {/* 버튼 클릭 시 팝업 생성 */}
+            
+            <PopupPostCode />
+            
+            {/* <div className="input_row">
+                <input 
+                id="userAdress"
+                name="userAdress"
+                value={userAdress}
+                onChange={(e) => setUserAdress(e.target.value)}
+                className="int" 
+                type="text" 
+                placeholder="주소" />
+            </div> */}
+            {/* <div className="input_row">
+                <input 
+                id="txtContent"
+                name="txtContent"
+                value={*}
+                onChange={(e) => *(e.target.value)}
+                className="int" 
+                type="text"
+                 placeholder="상세주소" />
+            </div> */}
+            <button className="join_btn" type="button" onClick={submitJoin} >회원가입</button>
         </article>
     );
 }
 
-export default Join;
+export default withRouter(Join);

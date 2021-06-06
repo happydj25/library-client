@@ -1,43 +1,46 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import {Link, useLocation, withRouter} from 'react-router-dom';
 
 const BoardView = ({history} : {history:any}) => {
 
     let boardData = useLocation<any>();
-    let kokoa = boardData.state.board;
+    let data = boardData.state.val;
 
-    console.log('boardData :'+JSON.stringify(boardData));
-    console.log(kokoa);
 
-    // 삭제할 글의 id
-    let boardDeleteId = kokoa.id;
+    // console.log('boardData :'+JSON.stringify(boardData));
+    console.log(data);
 
-/*     const boardDelete = () => {
-        let boardNum = JSON.parse(localStorage.getItem('board'));
-        let index = -1;
-        for ( var counter = 0; counter < boardNum.length; counter++) {
-            if ( boardNum[ counter ].id == boardDeleteId ) {
-                index = counter;
-                boardNum.splice(index,1); 
-                console.log(boardNum);
-                localStorage.setItem("board", JSON.stringify(boardNum));
-            }
-        }
+    // 삭제할 글의 id 보내기
+    const boardDelete = (id:any) => {
+        axios.delete(`http://localhost:4000/api/delete/${id}`);
         history.push('/boardlist');
-    } */
+    }
+
+
+    // const [boardList , setBoardList] = useState([]);
+
+    // useEffect(()=>{
+    //     axios.get('http://localhost:4000/api/select').then((response)=>{
+    //         setBoardList(response.data)
+    //     })
+    //   },[]);
+
+    // 글 삭제
+
 
 
     return (
         <div>
-            <div>제목: {kokoa.title}</div>
-            <div>작성시간: {kokoa.writDateTime}</div>
-            <div>글내용: {kokoa.txtContent}</div>
+            <div>제목: {data.board_title}</div>
+            <div>작성시간: {data.reg_dt}</div>
+            <div>작성자: {data.user_name}({data.user_id})</div>
+            <div>글내용: {data.board_text}</div>
             
             <div></div>
             <div className="btn_wrap">
-                <Link to={{pathname: `/boardmodifiy/${kokoa.id}`, state: {kokoa}}}>수정</Link>
-                {/* <button type="button" onClick={boardDelete}>삭제</button> */}
-                <button type="button" >삭제</button>
+                <Link to={{pathname: `/boardmodifiy/${data.board_no}`, state: {data}}}>수정</Link>
+                <button type="button" onClick={() => {boardDelete(data.board_no)}}>삭제</button>
                 <Link to="/boardlist">목록으로</Link>
             </div>
         </div>
