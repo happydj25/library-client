@@ -5,16 +5,103 @@ const app = express();
 const port = process.env.PORT || 4000;
 const mysql = require('mysql');
 
-const db = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'autoset',
-    database: 'happydjdb'
-})
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+
+
+app.post("/register", (req, res) => {
+    const user_id = req.body.user_id;
+    const user_pw = req.body.user_pw;
+
+    bcrypt.hash(user_pw, saltRounds, (err, hash) => {
+        if (err) {
+            console.log(err);
+        }
+        db.query(
+            `INSERT INTO user (user_id, user_pw) VALUES (?,?)`,
+            [user_id, hash],
+            (err, result) => {
+                console.log(err);
+            }
+        );
+    });
+});
+
+const verifyJWT = (req, res, next) => {
+    const token = req.headers["x-access-token"]
+    
+    if (!token) {
+        res.send("Yo, we need a token, please give it to us next time!")
+    } else {
+        jwt.verify(token, 'jwtSecret', (err, decoded) => {
+            if (err) {
+                // 인증실패
+                res.json({auth: false, massage: "U failed to authenticate"});
+            } else {
+                req.user_Id = decoded.id;
+                next();
+            }
+        })
+    }
+}
+
+// 엔딩포인트 인증성공
+app.get('/isUserAuth', verifyJWT, (req, res) => {
+    // res.send("Yo, u are authenticated Congrats!")
+    res.send("로그인 인증 성공")
+})
+
+app.get("/login", (req, res) => {
+    if (req.session.user) {
+        res.send({ loggedIn: true, user: req.session.user });
+    } else {
+        res.send({ loggedIn: false });
+    }
+});
+
+// 로그인
+app.post("/login", (req, res) => {
+    const user_id = req.body.user_id;
+    const user_pw = req.body.user_pw;
+
+    db.query(
+        // `SELECT * FROM user WHERE user_id = ?;`, user_id, (err, result) => {
+        `SELECT user_id FROM user = ?`, user_id, (err, result) => {
+            // console.log(err, result);
+            if (err) {
+                res.send({ err: err });
+            }
+
+            if (result.length > 0 ) {
+                bcrypt.compare(user_pw, result[0].user_pw, (error, response) => {
+                    if (response) {
+                        const id = result[0].id;
+                        // 아이디 전달
+                        const token = jwt.sign({id}, 'jwtSecret', {
+                            expiresIn: 300,
+                        });
+                        req.session.user = result;
+
+                        res.json({auth: true, token: token, result: result });
+                    } else {
+                        res.json({
+                            auth: false, 
+                            message: "wrong username/password combination" 
+                        });
+                    }
+                });
+            } else {
+                res.json({auth: false, message: "no user esists" });
+            }
+        }
+    );
+});
 
 // 문의게시판 글 추가
 app.post("/api/insert", (req, res) => {

@@ -9,58 +9,72 @@ const Join = ({history} : {history:any}) => {
     // let userId = "anonymous";
     // let userName = "anonymous";
 
-    const [userId, setUserId] = useState<any>('');
-    const [userPw, setUserPw] = useState<any>('');
-    const [userPw2, setUserPw2] = useState<any>('');
-    const [userName, setUserName] = useState<any>('');
-    const [userEmail, setUserEmail] = useState<any>('');
-    const [userPhone1, setUserPhone1] = useState<any>('');
-    const [userPhone2, setUserPhone2] = useState<any>('');
-    const [userPhone3, setUserPhone3] = useState<any>('');
-    const [userAdress, setUserAdress] = useState<any>('');
+    // const [userId, setUserId] = useState<any>('');
+    // const [userPw, setUserPw] = useState<any>('');
+    // const [userPw2, setUserPw2] = useState<any>('');
+    // const [userName, setUserName] = useState<any>('');
+    // const [userEmail, setUserEmail] = useState<any>('');
+    // const [userPhone, setUserPhone1] = useState<any>('');
+    // // const [userPhone2, setUserPhone2] = useState<any>('');
+    // // const [userPhone3, setUserPhone3] = useState<any>('');
+    // const [userAdress, setUserAdress] = useState<any>('');
 
-
-    const submitJoin = () => {
-        axios.post('http://localhost:4000/register', {
-
-            user_id: userId,
-            user_pw: userPw,
-            user_name: userName,            
-            user_email: userEmail,
-            user_phone: userPhone1 +'-'+ userPhone2 +'-'+ userPhone3,
-            user_address: userAdress,
-
-        }).then(response => {
-            alert(response.data);
-            history.push('/login');
-          })
-          .catch(error => {
-            console.log(error);
-          });        
-    }
-
-    // 비밀번호 일치 확인
-    const matchPassword = () => {
-        if( userPw != userPw2 ) {
-            alert("비밀번호가 일치 하지 않습니다");
-            setUserPw("");
-            setUserPw2("");
-            return false;
-          } else{
-            alert("비밀번호가 일치합니다");
-            return true;
-          }    
-    }
     
-    // 이메일 검증
-    const checkEmail = () => {
-        const regExp:any = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-        if (userEmail.match(regExp) != null) {
-            alert('Good!');
-         } else { 
-             alert('Error');
-         }
-    }
+    const [usernameReg, setUsernameReg] = useState("");
+    const [passwordReg, setPasswordReg] = useState("");
+    
+
+    const register = () => {
+        axios.post('http://localhost:4000/register', {
+            user_id: usernameReg,
+            user_pw: passwordReg
+        }).then(response => {
+            console.log(response);
+        });     
+    };
+
+    // const submitJoin = () => {
+    //     axios.post('http://localhost:4000/register', {
+
+    //         user_id: userId,
+    //         user_pw: userPw,
+    //         user_name: userName,            
+    //         user_email: userEmail,
+    //         user_phone: userPhone,
+    //         // user_phone: userPhone1 +'-'+ userPhone2 +'-'+ userPhone3,
+    //         user_address: userAdress,
+
+    //     }).then(response => {
+    //         alert(response.data);
+    //         history.push('/login');
+    //       })
+    //       .catch(error => {
+    //         console.log(error);
+    //       });        
+    // }
+
+    // // 비밀번호 일치 확인
+    // const matchPassword = () => {
+    //     if( userPw != userPw2 ) {
+    //         alert("비밀번호가 일치 하지 않습니다");
+    //         setUserPw("");
+    //         setUserPw2("");
+    //         return false;
+    //       } else{
+    //         alert("비밀번호가 일치합니다");
+    //         return true;
+    //       }    
+    // }
+    
+    // // 이메일 검증
+    // const checkEmail = () => {
+    //     const regExp:any = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    //     if (userEmail.match(regExp) != null) {
+    //         alert('Good!');
+    //      } else { 
+    //          alert('Error');
+    //      }
+    // }
 
     // 전화번호 입력 시 포커스 이동
     // const nextPhoneNum = () => {
@@ -180,7 +194,7 @@ const Join = ({history} : {history:any}) => {
             </ul>
 
             <hr />
-            <div className="input_row">
+            {/* <div className="input_row">
                 <input 
                 id="userName"
                 name="userName"
@@ -189,13 +203,13 @@ const Join = ({history} : {history:any}) => {
                 className="int" 
                 type="text" 
                 placeholder="이름" />
-            </div>
+            </div> */}
             <div className="input_row">
                 <input 
                 id="userId"
                 name="userId"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
+                value={usernameReg}
+                onChange={(e) => setUsernameReg(e.target.value)}
                 className="int" 
                 type="text" 
                 placeholder="아이디" />
@@ -204,13 +218,13 @@ const Join = ({history} : {history:any}) => {
                 <input 
                 // id="userPw"
                 name="userPw"
-                value={userPw}
-                onChange={(e) => setUserPw(e.target.value)}
+                value={passwordReg}
+                onChange={(e) => setPasswordReg(e.target.value)}
                 className="int" 
                 type="password" 
                 placeholder="비밀번호" />
             </div>
-            <div className="input_row">
+            {/* <div className="input_row">
                 <input 
                 ref="userPw2"
                 name="userPw2"
@@ -221,14 +235,21 @@ const Join = ({history} : {history:any}) => {
                 placeholder="비밀번호 확인"
                 onBlur={matchPassword}
                 />
-            </div>
-            <div className="input_row phone">
-                <input 
+            </div> */}
+            {/* <div className="input_row phone">
+
+                <input type="text" 
+                ref="userPhone"
+                name="userPhone"
+                value={userPhone}
+                placeholder="휴대폰번호 입력"
+                /> */}
+                {/* <input 
                 ref="userPhone1"
                 name="userPhone1"
                 value={userPhone1}
-                onChange={(e) => setUserPhone1(e.target.value)}
-                onKeyUp={nextPhoneNum}
+                // onChange={(e) => setUserPhone1(e.target.value)}
+                // onKeyUp={nextPhoneNum}
                 className="int" 
                 type="text" 
                 maxLength={3}
@@ -248,8 +269,8 @@ const Join = ({history} : {history:any}) => {
                 onChange={(e) => setUserPhone3(e.target.value)}
                 className="int" 
                 maxLength={4}
-                type="text" />
-            </div>
+                type="text" /> */}
+            {/* </div>
             <div className="input_row email">
                 <input 
                 id="userEmail"
@@ -261,7 +282,7 @@ const Join = ({history} : {history:any}) => {
                 placeholder="이메일 예) example@naver.com" 
                 onBlur={checkEmail}/>
             </div>
-            <hr />
+            <hr /> */}
             {/* 버튼 클릭 시 팝업 생성 */}
             
             <PopupPostCode />
@@ -286,7 +307,7 @@ const Join = ({history} : {history:any}) => {
                 type="text"
                  placeholder="상세주소" />
             </div> */}
-            <button className="join_btn" type="button" onClick={submitJoin} >회원가입</button>
+            <button className="join_btn" type="button" onClick={register} >회원가입</button>
         </article>
     );
 }
