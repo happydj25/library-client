@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 
@@ -9,12 +10,50 @@ const Login = () => {
 
     // const { onLogin } = props;
 
-    const [userid, setUserid] = useState<string>('');
+    // const [usernameReg, setUsernameReg] = useState("");
+    // const [passwordReg, setPasswordReg] = useState("");
+    
+
+    const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const onSubmit = (event: any) => {
-        event.preventDefault();
-        console.log(userid, password);
+    const [loginStatus, setLoginStatus] = useState(false);
+
+    axios.defaults.withCredentials = true;
+
+
+    const login = () => {
+        axios.post('http://localhost:4000/login', {
+            withCredentials: true,
+            user_id: username,
+            user_pw: password
+            
+        }).then(response => {
+            if (!response.data.message) {
+                // setLoginStatus(false);
+                setLoginStatus(response.data.message);
+            } else {
+                console.log(response.data);
+                // setLoginStatus(true);
+                // localStorage.setItem("token", )
+                setLoginStatus(response.data[0].user_id);
+            }
+        });     
+    };
+
+    const userAuthenticated = () => {
+        axios.get('http://localhost:4000/isUserAuth', {
+            headers: {
+                "x-access-token": "tlijahod"
+
+            }}).then((response)=> {
+                console.log(response);
+            })
+    }
+
+    // const onSubmit = (event: any) => {
+    //     event.preventDefault();
+    //     console.log(userid, password);
 
         // const loginid:string = ;
         // const loginpw:string = ;
@@ -29,7 +68,7 @@ const Login = () => {
             onSubmit 함수 안에서 userid, password를 서버로 보내고
             DB에서 맞는지 확인하고 로그인을 할수있도록 응답을 보내준다
             */
-    }
+    // }
 
     useEffect(() => {
         facebookInit();
@@ -53,15 +92,15 @@ const Login = () => {
      return (
             <article className="login">
                 <p>LOGIN</p>
-                <form onSubmit={onSubmit} action="/login" method="POST">
+                {/* <form onSubmit={onSubmit} action="/login" method="POST"> */}
                     <div className="input_row">
                         <input 
                             className="int" 
                             type="text" 
                             name="id"
                             placeholder="아이디" 
-                            value={userid}
-                            onChange={(e) => setUserid(e.target.value)}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
                     <div className="input_row">
@@ -74,10 +113,14 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
+                    {loginStatus && (
+                        <button type="button" onClick={userAuthenticated}>Check if Authenticated</button>
+                    )}
                     <button 
                         className="login_btn" 
-                        type="submit" >로그인</button>
-                </form>
+                        type="submit" 
+                        onClick={login}>로그인</button>
+                {/* </form> */}
                 
                 
                 <ul className="flUl">
