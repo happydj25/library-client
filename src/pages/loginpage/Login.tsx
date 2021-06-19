@@ -1,10 +1,12 @@
 // import React, { useState, useEffect } from 'react';
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory, withRouter} from 'react-router-dom';
 
 import GoogleLogin from '../../components/login/GoogleLogin';
 import NaverLogin from '../../components/login/NaverLogin';
 
+// import users from 'users.json';
+// import { fetchLogin } from "./service";
 
 const Login = (props: { onLogin: any; }) => {
 
@@ -16,50 +18,90 @@ const Login = (props: { onLogin: any; }) => {
     //     {}
     // ]
 
-    const { onLogin } = props;
+    const adminUser = {
+        userid: "asdf",
+        password: "asdf",
+        name : '윤동주',
+        phone : '010-7332-5710',
+        email : 'shemf1004@naver.com',
+        address : '서울특별시 서대문구 홍은동 280-9',
+    }
+    
+    const [user, setUser] = useState({
+        userid : "",
+        password : ""
+    });
 
-    const [userid, setUserid] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const onSubmit = (event: any) => {
-        event.preventDefault();
-        console.log(userid, password);
+    const history = useHistory();
 
-        /*
-            onSubmit 함수 안에서 userid, password를 서버로 보내고
-            DB에서 맞는지 확인하고 로그인을 할수있도록 응답을 보내준다
-            */
+    const [details, setDetails] = useState({userid: "", password: ""});
+
+    const submitHandler = (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+
+        Login(details);
     }
 
-    useEffect(() => {
-        facebookInit();
-    }, [])
+    const [error, setError] = useState("");
 
-    function facebookInit() {
-        FB.init({
-            appId: '2982476848741388',
-            cookie: true,
-            xfbml:true,
-            version: 'v9.0'
-        })
+
+    const Login = (details: { userid: any; password: any; }) => {
+        if (details.userid == adminUser.userid && details.password == adminUser.password) {
+            console.log('로그인 성공');
+            localStorage.setItem("userinfo", JSON.stringify(adminUser));
+
+            history.push('/');
+
+
+
+            setUser({
+                userid : details.userid,
+                password : details.password
+            });
+        } else {
+            console.log('기존 정보와 일치하지 않습니다.');
+        }
     }
 
-    function facebookLogin () {
-        FB.login((res) => {
-            console.log(res)
-        })
+    const Logout = () => {
+        setUser({ userid : "", password : "" });
     }
+
+
+
+
+
+
+    // useEffect(() => {
+    //     facebookInit();
+    // }, [])
+
+    // function facebookInit() {
+    //     FB.init({
+    //         appId: '2982476848741388',
+    //         cookie: true,
+    //         xfbml:true,
+    //         version: 'v9.0'
+    //     })
+    // }
+
+    // function facebookLogin () {
+    //     FB.login((res) => {
+    //         console.log(res)
+    //     })
+    // }
 
      return (
             <article className="login">
                 <p>LOGIN</p>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={submitHandler}>
                     <div className="input_row">
                         <input 
                             className="int" 
                             type="text" 
                             placeholder="아이디" 
-                            value={userid}
-                            onChange={(e) => setUserid(e.target.value)}
+                            onChange={e => setDetails({...details, userid: e.target.value})}
+                            value={details.userid}
                         />
                     </div>
                     <div className="input_row">
@@ -67,8 +109,8 @@ const Login = (props: { onLogin: any; }) => {
                             className="int" 
                             type="password" 
                             placeholder="비밀번호"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={e => setDetails({...details, password: e.target.value})}
+                            value={details.password}
                         />
                     </div>
                     <button 
@@ -95,7 +137,7 @@ const Login = (props: { onLogin: any; }) => {
                             <NaverLogin />
                         </li>
                         <li>
-                            <button type="button" onClick={facebookLogin}>페북로그인</button>
+                            {/* <button type="button" onClick={facebookLogin}>페북로그인</button> */}
                         </li>
                     </ul>
                 </div>
@@ -104,4 +146,4 @@ const Login = (props: { onLogin: any; }) => {
      );
 }
 
-export default Login;
+export default withRouter(Login);

@@ -295,6 +295,24 @@ nav article li {
     cursor: pointer;
 }
 
+nav article ul li.welcome {
+	width: 190px;
+}
+
+nav article ul li.welcome h2 {
+	width: 190px;
+   	line-height: 50px;
+   	color: #fff;
+}
+
+.logout {
+    background: 0;
+    border: 0;
+    color: #fff;
+    font-weight: bold;
+}
+
+
 main {
     width: 1000px;
     margin: 30px auto;

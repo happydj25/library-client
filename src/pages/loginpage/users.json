@@ -1,0 +1,14 @@
+
+{
+    "users": [
+      {
+        "id": 1,
+        "name" : "윤동주",
+        "userId" : "asdf",
+        "password" : "asdf",
+        "phone" : "010-7332-5710",
+        "email" : "shemf1004@naver.com",
+        "address" : "서울특별시 서대문구 홍은동 280-9"
+      }
+    ]
+  }

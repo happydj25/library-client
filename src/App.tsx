@@ -13,6 +13,8 @@ const App = () => {
     // const input = useInput('');
     // console.log(name);
 
+    
+
     return (
             <div className="wrap">
                 <Header />

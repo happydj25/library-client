@@ -3,6 +3,8 @@ import {Route, Switch} from 'react-router-dom';
 import routes from '../../pages/page-route';
 
 const Content = () => {
+
+    
     return (
         <switch>
             {routes.map((route, index) => (
