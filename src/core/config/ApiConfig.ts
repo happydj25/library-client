@@ -4,7 +4,7 @@ import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
  * axios 요청 환경 설정
  */
 const axiosRequestConfiguration: AxiosRequestConfig = {
-    baseURL: 'http://localhost:5000',
+    baseURL: 'http://localhost:4000',
     responseType: 'json',
     headers: {
         Accept: 'application/json',

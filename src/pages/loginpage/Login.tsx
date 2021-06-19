@@ -1,9 +1,15 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { apiService } from 'core/service/ApiService';
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 
+
 import GoogleLogin from '../../components/login/GoogleLogin';
 import NaverLogin from '../../components/login/NaverLogin';
+interface User {
+    userId: string,
+    message: string,
+}
 
 const Login = () => {
     // const Login = (props: { onLogin: any; }) => {
@@ -14,62 +20,34 @@ const Login = () => {
     // const [passwordReg, setPasswordReg] = useState("");
     
 
-    const [username, setUsername] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const [username, setUsername] = useState<any>('');
+    const [password, setPassword] = useState<any>('');
 
-    const [loginStatus, setLoginStatus] = useState(false);
+    const [loginStatus, setLoginStatus] = useState('');
 
     axios.defaults.withCredentials = true;
 
-
-    const login = () => {
-        axios.post('http://localhost:4000/login', {
-            withCredentials: true,
-            user_id: username,
-            user_pw: password
-            
-        }).then(response => {
-            if (!response.data.message) {
-                // setLoginStatus(false);
-                setLoginStatus(response.data.message);
-            } else {
-                console.log(response.data);
-                // setLoginStatus(true);
-                // localStorage.setItem("token", )
-                setLoginStatus(response.data[0].user_id);
-            }
-        });     
+    const login = async () => {
+        const result = await apiService().post<User>('login', {
+            username: username,
+            password: password
+        }).then(res => res.data);
+        
+        if(result !== undefined) { 
+            setLoginStatus(result?.message);
+        }
     };
 
-    const userAuthenticated = () => {
-        axios.get('http://localhost:4000/isUserAuth', {
-            headers: {
-                "x-access-token": "tlijahod"
+    useEffect(() => {
+        // 사용자의 로그인 상태 구분
+        axios.get('http://localhost:4000/login').then((response) => {
+            if (response.data.loggedIn == true) {
+                setLoginStatus(response.data.user[0].user_id);
+            }
+        });
+    }, []);
 
-            }}).then((response)=> {
-                console.log(response);
-            })
-    }
-
-    // const onSubmit = (event: any) => {
-    //     event.preventDefault();
-    //     console.log(userid, password);
-
-        // const loginid:string = ;
-        // const loginpw:string = ;
-
-
-        // const userListcopy:any = userList;
-
-        
-
-
-        /*
-            onSubmit 함수 안에서 userid, password를 서버로 보내고
-            DB에서 맞는지 확인하고 로그인을 할수있도록 응답을 보내준다
-            */
-    // }
-
+    // 페이스북 소셜 로그인
     useEffect(() => {
         facebookInit();
     }, [])
@@ -92,7 +70,6 @@ const Login = () => {
      return (
             <article className="login">
                 <p>LOGIN</p>
-                {/* <form onSubmit={onSubmit} action="/login" method="POST"> */}
                     <div className="input_row">
                         <input 
                             className="int" 
@@ -113,14 +90,13 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    {loginStatus && (
-                        <button type="button" onClick={userAuthenticated}>Check if Authenticated</button>
-                    )}
                     <button 
                         className="login_btn" 
                         type="submit" 
                         onClick={login}>로그인</button>
-                {/* </form> */}
+                <h1>
+                    {loginStatus}
+                </h1>
                 
                 
                 <ul className="flUl">
