@@ -93,7 +93,7 @@ const BookView = () => {
                         id="bookNum" 
                         value={bookNum}
                         min={1}
-                        onChange={(e) => setBookNum(e.target.value)}
+                        onChange={(e) => setBookNum(parseInt(e.target.value))}
                         />
                     </span>
                     <div className="btn_wrap">

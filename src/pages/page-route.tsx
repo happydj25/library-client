@@ -77,7 +77,7 @@ const router = [
 
     {
         path:'/pay',
-        component: () => <Pay />
+        component: () => <Pay bookPriceSum />
     },
     {
         path:'/payend',

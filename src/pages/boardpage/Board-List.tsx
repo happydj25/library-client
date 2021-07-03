@@ -12,18 +12,19 @@ const BoardList = () => {
 // 3. 글 리스트는 배열의 순서대로 내용 불러온다
 
     // const [boards, setBoards] = useState<any>([]);
-    const localBoard = JSON.parse(localStorage.getItem('board')) || {};
-    const [boards, setBoards] = useState(localBoard);
+    // const localBoard:any = JSON.parse(localStorage.getItem('board')) || {};
+    const localBoard:any = localStorage.getItem('board') || {};
+    // const [boards, setBoards] = useState(localBoard);
 
-    const renderBoard = boards.length ? boards.map((board) => {
+    const renderBoard = localBoard.length ? localBoard.map((localBoard: { localBoard: any; id: any; }) => {
         return (
         <Board 
-            board={board} 
-            key={board.id}
+            board={localBoard} 
+            id={localBoard.id}
         />
         );
         
-    }) : <td colSpan="4">등록된 게시글이 없습니다.</td>;
+    }) : <td colSpan={4}>등록된 게시글이 없습니다.</td>;
 
 
     return (

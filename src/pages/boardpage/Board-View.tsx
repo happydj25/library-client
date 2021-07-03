@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Link, useLocation, withRouter} from 'react-router-dom';
 
-const BoardView = ({ history }) => {
+const BoardView = ({history}: {history:any}) => {
 
     let boardData = useLocation<any>();
     let kokoa = boardData.state.board;
@@ -13,7 +13,8 @@ const BoardView = ({ history }) => {
     let boardDeleteId = kokoa.id;
 
     const boardDelete = () => {
-        let boardNum = JSON.parse(localStorage.getItem('board'));
+        let boardNum:any = JSON.parse(localStorage.getItem('board') || '{}');
+        
         let index = -1;
         for ( var counter = 0; counter < boardNum.length; counter++) {
             if ( boardNum[ counter ].id == boardDeleteId ) {

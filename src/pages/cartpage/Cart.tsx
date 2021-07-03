@@ -35,15 +35,15 @@ const Cart = () => {
     }
     
 
-    const allChecked = (selectAll: { checked: any; }) => {
+    // const allChecked = (selectAll: { checked: any; }) => {
 
-        const checkboxes  = document.getElementsByName('cartbook');
+    //     const checkboxes  = document.getElementsByName('cartbook');
         
-        checkboxes.forEach((checkbox) => {
-          checkbox.checked = selectAll.checked;
-        })
+    //     checkboxes.forEach((checkbox) => {
+    //       checkbox.checked = selectAll.checked;
+    //     })
 
-    }
+    // }
 
     // 1. 로컬스토리에서 체크된 항목 bookId 를 가진 요소를 삭제한다
     // 2. 렌더 카트를 다시 그린다
@@ -55,54 +55,54 @@ const Cart = () => {
      *
      * @param config 환경
      */
-    const checkSelectAll = () => {
+    // const checkSelectAll = () => {
 
-        var x = document.getElementsByTagName("input[type='checkbox']");
-        var i;
+    //     var x = document.getElementsByTagName("input[type='checkbox']");
+    //     var i;
 
-        console.log(x.length);
-        for (i = 0; i < x.length; i++) {
-            if (x[i].type == "checkbox") {
-                x[i].addEventListener("click", function() {
-                    console.log('Click on every checkbox')
-                });
-            }
-        }
+    //     console.log(x.length);
+    //     for (i = 0; i < x.length; i++) {
+    //         if (x[i].type == "checkbox") {
+    //             x[i].addEventListener("click", function() {
+    //                 console.log('Click on every checkbox')
+    //             });
+    //         }
+    //     }
 
-    }
+    // }
 
 
-    function addCart() {        
-        const cartList = JSON.parse(localStorage.getItem('cartlist') || "[]");
+    // function addCart() {        
+    //     const cartList = JSON.parse(localStorage.getItem('cartlist') || "[]");
 
-        let index = -1;
-        for (let counter = 0, cnt = cartList.length; counter < cnt; counter++) {
-            if ( cartList[ counter ].bookID == bookID ) {
-                index = counter;
-                // 한번 장바구니에 담겨있다면 새로추가 X 있는 항목에 책 수량만 +
-                const kkk:number = Number(cartList[counter].bookNum) + Number(bookNum);
-                cartList[counter].bookNum = kkk;
-                localStorage.setItem('cartlist', JSON.stringify(cartList));
-                return ;
-            }
-        }
+    //     let index = -1;
+    //     for (let counter = 0, cnt = cartList.length; counter < cnt; counter++) {
+    //         if ( cartList[ counter ].bookID == bookID ) {
+    //             index = counter;
+    //             // 한번 장바구니에 담겨있다면 새로추가 X 있는 항목에 책 수량만 +
+    //             const kkk:number = Number(cartList[counter].bookNum) + Number(bookNum);
+    //             cartList[counter].bookNum = kkk;
+    //             localStorage.setItem('cartlist', JSON.stringify(cartList));
+    //             return ;
+    //         }
+    //     }
 
-        let addCartBook:any = {
-            id: cartList.length + 1,
-            bookID :bookID,
-            bookTitle : bookTitle,
-            bookNum : bookNum,
-            bookImageLinks : bookImageLinks,
-            bookAuthors : bookAuthors,
-            dftBookPublisher : dftBookPublisher,
-            dftBookRetailPrice : dftBookRetailPrice,
-            bookPublishedDate : bookPublishedDate
-        };
+    //     let addCartBook:any = {
+    //         id: cartList.length + 1,
+    //         bookID :bookID,
+    //         bookTitle : bookTitle,
+    //         bookNum : bookNum,
+    //         bookImageLinks : bookImageLinks,
+    //         bookAuthors : bookAuthors,
+    //         dftBookPublisher : dftBookPublisher,
+    //         dftBookRetailPrice : dftBookRetailPrice,
+    //         bookPublishedDate : bookPublishedDate
+    //     };
 
-        cartList.push(addCartBook);
-        localStorage.setItem('cartlist', JSON.stringify(cartList));
+    //     cartList.push(addCartBook);
+    //     localStorage.setItem('cartlist', JSON.stringify(cartList));
 
-    }
+    // }
 
     return (
         <div className="my_cart">
@@ -130,7 +130,7 @@ const Cart = () => {
                                     <input 
                                     type="checkbox"
                                     name="selectall"
-                                    onClick={checkSelectAll}
+                                    // onClick={checkSelectAll}
                                     id="cart_all_select" />
                                 </label>
                             </th>
@@ -150,7 +150,9 @@ const Cart = () => {
                     </span>
                     <span>
                         <Link to="/pay">선택 상품만 주문</Link>
-                        <Link to="/pay">장바구니 전체 주문</Link>                        
+                        <Link to={{pathname:'/pay', state:{bookPriceSum}}} >장바구니 전체 주문</Link>     
+
+                                           
                     </span>
                 
                 </div>

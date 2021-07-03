@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import {Link} from 'react-router-dom';
 
 
-const Header = (props: { getTextValue: (arg0: string) => void; }) => {
+const Header = () => {
 
     // let [searchKeyWord, setSearchKeyWord] = useState<any>('');
     // const sendTextValue = () => {

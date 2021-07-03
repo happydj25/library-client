@@ -1,21 +1,34 @@
 import React, { Component, useEffect, useState } from 'react';
 import {Link, useLocation} from 'react-router-dom';
-import OrderCheck from '../../components/order/Order-Check';
+// import OrderCheck from '../../components/order/Order-Check';
 import OrderItem from '../../components/order/Order-Item';
 import PayType from './Pay-Type';
 
-const Pay = () => {
+const Pay = (state:{bookPriceSum:any}) => {
 
    
-    // console.log(location);
-    let payNowBookData = useLocation<any>();
+    // let payNowBookData = useLocation<any>();
     // let asd:any = payNowBookData.state;
-    let asd:any = payNowBookData;
+   
+    const location:any = useLocation();
+    // const bookPriceSum:any = 
+    const bookPriceSum:any = location.state.bookPriceSum;
 
-    console.log('강아지');
-    // console.log(asd.location.state.book);
+    
+
+    const [deliveryRequest, setDeliveryRequest] = useState<string>('');
+
+    const [newAdress, setNewAdress] = useState({adress: "", detailadress: "", postcode: ""});
 
 
+
+    // 사용자 정보
+    const orderer = JSON.parse(localStorage.getItem('userinfo') || "[]");
+    
+
+    function onNewAdress () {
+        document.getElementsByClassName('newadress').classList.remove('hidden');;
+    }
 
     // console.log(payNowBookData.state.book.accessInfo);
 //     let location:any = useLocation();
@@ -71,13 +84,41 @@ const Pay = () => {
             <form action="">
                 <h2>결제하기</h2>
                 <div>
-                    <h3>배송지</h3>
+                    <h3>배송 정보</h3>
                     {/* <h3 title={title}>{title}}</h3> */}
                     <dl>
-                        <dt>윤동주(자주쓰는 주소 별명1)</dt>
-                        <dd className="phone_num">010-7332-5710</dd>
-                        <dd>서울특별시 서대문구 홍은동 288-1 (12345)</dd>
+                        <dt>{orderer.name}</dt>
+                        <dd className="phone_num">{orderer.phone}</dd>
                         <dd>
+                            {orderer.address}
+                            
+                            <button type="button" onClick={onNewAdress}>다른주소 입력하기</button>
+
+                            <div className="newadress hidden">
+                                <ul>
+                                    <li>
+                                        <input 
+                                        type="text" placeholder="주소" 
+                                        onChange={(e) => setNewAdress({...newAdress, adress:e.target.value})}
+                                        /></li>
+                                    <li>
+                                        <input 
+                                        type="text" placeholder="상세 주소" 
+                                        onChange={(e) => setNewAdress({...newAdress, detailadress:e.target.value})}
+                                        /></li>
+                                    <li>
+                                        <input 
+                                        type="text" placeholder="우편번호" 
+                                        onChange={(e) => setNewAdress({...newAdress, postcode:e.target.value})}
+                                        /></li>
+                                    <li>
+                                        <button type="button">입력한 주소 사용하기</button>
+                                    </li>
+                                </ul>
+                            </div>                            
+                            
+                        </dd>
+                        <dd className="delivery-request">
                             <select name="" id="">
                                 <option value="">배송메모를 선택해 주세요</option>
                                 <option value="">요청사항을 직접 입력합니다.</option>
@@ -85,27 +126,23 @@ const Pay = () => {
                                 <option value="">부재시 경비실에 맡겨주세요</option>
                                 <option value="">부재시 전화나 문자 남겨주세요</option>
                             </select>
-                            <textarea name="" id="" className="hidden" value="요청사항을 입력해 주세요"></textarea>
+                            <div className="hidden">
+                                <input type="text" placeholder="요청사항을 입력해 주세요" 
+                                onChange={(e) => setDeliveryRequest(e.target.value)}
+                                />
+                            </div>
                         </dd>
                     </dl>
                 </div>
-                <div>
-                    <h3>주문자</h3>
-                    <dl>
-                        <dd>윤동주</dd>
-                        <dd>010-7332-5710</dd>
-                        <dd>shemf1004@naver.com</dd>
-                    </dl>
-                </div>
                 {/* <OrderItem asd={asd.location.state.book} /> */}
-                <OrderItem asd={asd} />
+                <OrderItem bookPriceSum={bookPriceSum} />
                 
-                <div>
+                <div className="paymentmethod">
                     <h3>결제수단</h3>
                     <PayType />
                 </div>
 
-                <OrderCheck />
+                {/* <OrderCheck /> */}
                 
                 <div className="btn_wrap">
                     {/* <Link to="/PayEnd">결제하기</Link> */}

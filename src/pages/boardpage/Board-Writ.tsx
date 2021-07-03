@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link, NavLink, useLocation, withRouter} from 'react-router-dom';
 
-const BoardWrit = ({ history }) => {
+const BoardWrit = ({history}:{history:any}) => {
 
     let [boardTitle, setBoardTitle] = useState<any>('');
     let [boardTxtContent, setBoardTxtContent] = useState<any>('');
@@ -30,7 +30,7 @@ const BoardWrit = ({ history }) => {
     const onSubmit = (event: { preventDefault: () => void; }) => {
         validateForm();
         event.preventDefault();
-        let boardNum = JSON.parse(localStorage.getItem('board'));
+        let boardNum:any = JSON.parse(localStorage.getItem('board') || '{}');
         let count = 0;
 
         if (boardNum != null) {
@@ -44,8 +44,8 @@ const BoardWrit = ({ history }) => {
         
         const newBoard:any = {
             id: count,
-            title :document.getElementById('title').value,
-            txtContent :document.getElementById('txtContent').value,
+            title :boardTitle,
+            txtContent :boardTxtContent,
             writDateTime: new Date().toLocaleString()
         };
 
@@ -76,8 +76,8 @@ const BoardWrit = ({ history }) => {
                 <div style={{color: 'red'}}>{titleError}</div>
 
                 <textarea 
-                    cols="30" 
-                    rows="10"
+                    cols={30} 
+                    rows={10}
                     id="txtContent"
                     name="txtContent"
                     value={boardTxtContent}

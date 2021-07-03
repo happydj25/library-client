@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-
+import {Link, useLocation} from 'react-router-dom';
 
 function OrderItem (props:any) {
-    // console.log(props);
+// function OrderItem (props:any) {
+    
 
     // let bookData:any = props.asd.state.bookData;
     // const bookID:any = bookData.id;
@@ -31,32 +31,43 @@ function OrderItem (props:any) {
     console.log(cartList);
 
 
+    // const allBookPrice:any = []; 
+
+    const itemList:any = cartList.length ? cartList.map((cartList:any) => { 
+        console.log('이게머냐'+JSON.stringify(cartList));
+        return (
+            // <Carttr cart={cart}/>
+
+            <li className={cartList.id}>
+                <div className="img">
+                    <img src={cartList.bookImageLinks} alt={cartList.bookTitle}/>
+                </div>
+
+                
+                <div className="bookdata">
+                    <strong><Link to="/bookview">{cartList.bookTitle}</Link></strong>
+                    <div>
+                        <span className="author">지은이 : {cartList.bookAuthors}</span>
+                        <span>출판사 : {cartList.dftBookPublisher}</span>    
+                        <span className="num">구매수량 : <b>{cartList.bookNum}</b> 권</span>
+                        <span className="price">가격 : <b>{(cartList.dftBookRetailPrice * cartList.bookNum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</b> 원 </span>
+                    </div>
+                </div>
+                <button type="button">삭제</button>
+                
+            </li>
+        );
+    }) : <td colSpan={4}>장바구니 내역이 없습니다.</td>;
+
+
 
     return (
         <div className="order_item">
             <h3>주문상품</h3>
                 <ul>
-                    {/* <li bookID={bookID}>
-                        <div className="img">
-                            <img src={bookImageLinks} alt={bookTitle}/>
-                        </div>
-                        <strong><Link to="/bookview">{bookTitle}</Link></strong>
-                        <span className="author">{bookAuthors}/{bookPublisher}</span>
-                        <span className="num"><input id="bookNum" type="text" value="1"/>권</span>
-                        <span className="price">할인전 : {bookListPrice}원 /  할인후 :{bookRetailPrice}원 </span>
-                    </li> */}
-
-                    <li>
-                        <div className="img">
-                            {/* <img src={bookImageLinks} alt={bookTitle}/> */}
-                        </div>
-                        <strong><Link to="/bookview"></Link></strong>
-                        <span className="author"></span>
-                        <span className="num"><input id="bookNum" type="text" value="1"/>권</span>
-                        <span className="price">할인전 :원 /  할인후 :원 </span>
-                    </li>
+                    {itemList}                    
                 </ul>
-                <div className="sum">주문금액 : 15,900</div>
+                <div className="sum">총 주문금액 : {JSON.stringify(props.bookPriceSum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</div>
             {/* <!-- 12,900 + 3000원 더한 금액 , 5만원 이상 무료배송--> */}
                 <Link className="hidden" to="/ReviewWrit">리뷰쓰기</Link>
             {/* <input type="button" value="취소요청" /> */}

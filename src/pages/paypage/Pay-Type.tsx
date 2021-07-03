@@ -59,9 +59,9 @@ export default function VerticalTabs() {
   };
 
   // 랜덤 계좌번호 생성
-  const [bankAccountNum, setBankAccountNum] = useState<any>(0);
+  const [bankAccountNum, setBankAccountNum] = useState<any>(Math.floor(Math.random() * 10000000000000));
   function chageLangSelect() {
-    setBankAccountNum (bankAccountNum => Math.floor(Math.random() * 10000000000000)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    setBankAccountNum ((bankAccountNum: any) => setBankAccountNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
   }
 
   return (
@@ -83,29 +83,30 @@ export default function VerticalTabs() {
           <option value="">국민은행</option>
           <option value="">우리은행</option>
         </select>
-        입금계좌 :{bankAccountNum} 우리은행
+        입금계좌 :<b>{bankAccountNum}</b> 우리은행
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className="card">
           <div className="info">
-            <span>카드정보</span><br></br>
-            <select name="" id="">
-              <option value="우리">우리</option>
-              <option value="국민">국민</option>
-            </select>
-            <input type="text" name="" id="" maxLength="4" />-
-            <input type="text" name="" id="" maxLength="4" />-
-            <input type="password" name="" id="" maxLength="4" />-
-            <input type="text" name="" id="" maxLength="4" />
-            <hr />
-            <span>유효기간 (MMYY)</span>
-            <input type="text" name="" id="" maxLength="4" />
-            <hr />
-            <span>CVC (카드 뒷면 3자리 숫자)</span>
-            <input type="text" name="" id="" maxLength="3" />
-            <hr />
-            <span>카드 비밀번호 (비밀번호 앞 2자리 숫자)</span>
-            <input type="password" name="" id="" maxLength="2" />
+            <div className="card_num">
+              <span>카드정보</span>
+              <select name="" id="">
+                <option value="우리">우리</option>
+                <option value="국민">국민</option>
+              </select>
+              <input type="text" name="" id="" maxLength={4} />-
+              <input type="text" name="" id="" maxLength={4} />-
+              <input type="password" name="" id="" maxLength={4} />-
+              <input type="text" name="" id="" maxLength={4} />
+               / 유효기간 <input type="text" name="" id="" maxLength={4} placeholder="(MMYY)" />
+            </div>            
+            <div className="division50">
+              <input type="text" name="" id="" maxLength={3} placeholder="CVC (카드 뒷면 3자리)"/>
+            </div>
+            <div className="division50">
+              <input type="password" name="" id="" maxLength={2} placeholder="카드 비밀번호 (비밀번호 앞 2자리 숫자)" />
+            </div>
+            
           </div>
         </div>
       </TabPanel>
