@@ -3,33 +3,40 @@ import {Link} from 'react-router-dom';
 
 
 function OrderItem (props:any) {
-    console.log(props);
+    // console.log(props);
 
-    let bookData:any = props.asd.state.bookData;
-    const bookID:any = bookData.id;
-    // 책 이미지 
-    const bookImageLinks:string = bookData.volumeInfo.imageLinks.thumbnail;
-    // 책이름
-    const bookTitle:string = bookData.volumeInfo.title;
-    // 지은이
-    const bookAuthors:string = bookData.volumeInfo.authors;
-    // 출판사
-    const bookPublisher:string = bookData.volumeInfo.publisher;
-    // 할인전가격
-    const bookListPrice:any = bookData.saleInfo.listPrice.amount;
-    // 할인가격
-    const bookRetailPrice:any = bookData.saleInfo.retailPrice.amount;
+    // let bookData:any = props.asd.state.bookData;
+    // const bookID:any = bookData.id;
+    // // 책 이미지 
+    // const bookImageLinks:string = bookData.volumeInfo.imageLinks.thumbnail;
+    // // 책이름
+    // const bookTitle:string = bookData.volumeInfo.title;
+    // // 지은이
+    // const bookAuthors:string = bookData.volumeInfo.authors;
+    // // 출판사
+    // const bookPublisher:string = bookData.volumeInfo.publisher;
+    // // 할인전가격
+    // const bookListPrice:any = bookData.saleInfo.listPrice.amount;
+    // // 할인가격
+    // const bookRetailPrice:any = bookData.saleInfo.retailPrice.amount;
 
 
     // function bfbn() {
     //     console.log(#bookNum)
     // }
 
+
+    const cartList = JSON.parse(localStorage.getItem('cartlist') || "[]");
+
+    console.log(cartList);
+
+
+
     return (
         <div className="order_item">
             <h3>주문상품</h3>
                 <ul>
-                    <li bookID={bookID}>
+                    {/* <li bookID={bookID}>
                         <div className="img">
                             <img src={bookImageLinks} alt={bookTitle}/>
                         </div>
@@ -37,6 +44,16 @@ function OrderItem (props:any) {
                         <span className="author">{bookAuthors}/{bookPublisher}</span>
                         <span className="num"><input id="bookNum" type="text" value="1"/>권</span>
                         <span className="price">할인전 : {bookListPrice}원 /  할인후 :{bookRetailPrice}원 </span>
+                    </li> */}
+
+                    <li>
+                        <div className="img">
+                            {/* <img src={bookImageLinks} alt={bookTitle}/> */}
+                        </div>
+                        <strong><Link to="/bookview"></Link></strong>
+                        <span className="author"></span>
+                        <span className="num"><input id="bookNum" type="text" value="1"/>권</span>
+                        <span className="price">할인전 :원 /  할인후 :원 </span>
                     </li>
                 </ul>
                 <div className="sum">주문금액 : 15,900</div>

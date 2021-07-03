@@ -49,17 +49,27 @@ const Cart = () => {
     // 2. 렌더 카트를 다시 그린다
     // 3.
 
-    const selectAll = () => {
 
-        const checkboxes:any = document.getElementsByName('cartbook');
+    /**
+     * axios 초기화를 한다.
+     *
+     * @param config 환경
+     */
+    const checkSelectAll = () => {
 
-        checkboxes.forEach((checkbox: { checked: any; }) => {
-            checkbox.checked = selectAll.checked;
-        })
-        
+        var x = document.getElementsByTagName("input[type='checkbox']");
+        var i;
+
+        console.log(x.length);
+        for (i = 0; i < x.length; i++) {
+            if (x[i].type == "checkbox") {
+                x[i].addEventListener("click", function() {
+                    console.log('Click on every checkbox')
+                });
+            }
+        }
 
     }
-
 
 
     function addCart() {        
@@ -119,9 +129,8 @@ const Cart = () => {
                                 <label htmlFor="cart_all_select">전체선택
                                     <input 
                                     type="checkbox"
-                                    name="cartbook" 
-                                    value='selectAll'
-                                    onClick={selectAll(this)}
+                                    name="selectall"
+                                    onClick={checkSelectAll}
                                     id="cart_all_select" />
                                 </label>
                             </th>

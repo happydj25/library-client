@@ -10,7 +10,8 @@ const Cart = ({cart}:{cart:any}) => {
     // 책가격 3자리수 콤마 추가
     const bookPriceWon:any = cart.dftBookRetailPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     
-    console.log(cart);
+
+
 
     return (
         <tr id={cart.id}>
@@ -29,7 +30,7 @@ const Cart = ({cart}:{cart:any}) => {
                 <input 
                 type="number" 
                 value={bookNum}
-                mini={1}
+                min={1}
                 onChange={(e) => setBbookNum(e.target.value)}
                 />
             </td>
@@ -37,6 +38,7 @@ const Cart = ({cart}:{cart:any}) => {
                 <input 
                 type='checkbox'
                 name='cartbook' 
+                // onClick={checkSelectAll}
                 id={cart.id} />
             </td>
         </tr>
