@@ -23,12 +23,20 @@ const Pay = (state:{bookPriceSum:any}) => {
 
 
     // 사용자 정보
-    const orderer = JSON.parse(localStorage.getItem('userinfo') || "[]");
-    
+    let [orderer, setOrderer] = useState(JSON.parse(localStorage.getItem('userinfo') || "[]"));
 
-    function onNewAdress () {
-        document.getElementsByClassName('newadress').classList.remove('hidden');;
-    }
+    
+    // useEffect(() => {
+    //     const Subscription = props.source.subscribe();
+    //     return () => {
+    //       // Clean up the subscription
+    //       subscription.unsubscribe();
+    //     };
+    //   });
+
+    // function onNewAdress () {
+    //     document.getElementsByClassName('newadress').classList.remove('hidden');;
+    // }
 
     // console.log(payNowBookData.state.book.accessInfo);
 //     let location:any = useLocation();
@@ -76,8 +84,26 @@ const Pay = (state:{bookPriceSum:any}) => {
     // const bookListPrice:any = location.state.book.saleInfo.listPrice.amount;
     // // 할인가격
     // const bookRetailPrice:any = location.state.book.saleInfo.retailPrice.amount;
-    
-   
+
+    const [isOpened, setIsOpened] = useState(false);
+
+    function onChangeAdressClick() {
+        setIsOpened(wasOpened => !wasOpened);
+    };
+
+    // const postNewAdress = () => {
+    //     const newAdressGroup = newAdress.adress + " " + newAdress.detailadress + " " + newAdress.postcode;
+    //     setOrderer({...orderer, adress:newAdressGroup});
+    //     setIsOpened(wasOpened => !wasOpened);
+
+
+    //     let nowUserInfo = (JSON.parse(localStorage.getItem('userinfo') || "[]"));
+    //     nowUserInfo.adress = newAdressGroup;
+    //     console.log(nowUserInfo);
+
+    //     localStorage.removeItem('userinfo');
+    //     // localStorage.setItem('userinfo', nowUserInfo);
+    // };
 
     return (
         <article className="pay">
@@ -91,32 +117,34 @@ const Pay = (state:{bookPriceSum:any}) => {
                         <dd className="phone_num">{orderer.phone}</dd>
                         <dd>
                             {orderer.address}
-                            
-                            <button type="button" onClick={onNewAdress}>다른주소 입력하기</button>
+                            <button type="button" onClick={onChangeAdressClick}>다른주소 입력하기</button>
+                            {isOpened && 
+                                <div className="newadress">
+                                    <ul>
+                                        <li>
+                                            <input 
+                                            type="text" placeholder="주소" 
+                                            onChange={(e) => setNewAdress({...newAdress, adress:e.target.value})}
+                                            value={newAdress.adress}
+                                            /></li>
+                                        <li>
+                                            <input 
+                                            type="text" placeholder="상세 주소" 
+                                            onChange={(e) => setNewAdress({...newAdress, detailadress:e.target.value})}
+                                            value={newAdress.detailadress}
+                                            /></li>
+                                        <li>
+                                            <input 
+                                            type="text" placeholder="우편번호" 
+                                            onChange={(e) => setNewAdress({...newAdress, postcode:e.target.value})}
+                                            value={newAdress.postcode}
+                                            /></li>
+                                        <li>
+                                            {/* <button type="button"  onClick={postNewAdress}>입력한 주소 사용하기</button> */}
+                                        </li>
+                                    </ul>
+                                </div> }
 
-                            <div className="newadress hidden">
-                                <ul>
-                                    <li>
-                                        <input 
-                                        type="text" placeholder="주소" 
-                                        onChange={(e) => setNewAdress({...newAdress, adress:e.target.value})}
-                                        /></li>
-                                    <li>
-                                        <input 
-                                        type="text" placeholder="상세 주소" 
-                                        onChange={(e) => setNewAdress({...newAdress, detailadress:e.target.value})}
-                                        /></li>
-                                    <li>
-                                        <input 
-                                        type="text" placeholder="우편번호" 
-                                        onChange={(e) => setNewAdress({...newAdress, postcode:e.target.value})}
-                                        /></li>
-                                    <li>
-                                        <button type="button">입력한 주소 사용하기</button>
-                                    </li>
-                                </ul>
-                            </div>                            
-                            
                         </dd>
                         <dd className="delivery-request">
                             <select name="" id="">

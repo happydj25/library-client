@@ -28,13 +28,13 @@ function OrderItem (props:any) {
 
     const cartList = JSON.parse(localStorage.getItem('cartlist') || "[]");
 
-    console.log(cartList);
+    // console.log(cartList);
 
 
     // const allBookPrice:any = []; 
 
     const itemList:any = cartList.length ? cartList.map((cartList:any) => { 
-        console.log('이게머냐'+JSON.stringify(cartList));
+        // console.log('이게머냐'+JSON.stringify(cartList));
         return (
             // <Carttr cart={cart}/>
 
